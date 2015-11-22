@@ -3,12 +3,12 @@ import java.awt.Image;
 /**
  * @author	Andrew Sytsma <asytsma@purdue.edu>
  */
-public class X implements Piece
+public class X //implements Piece
 {
 	/**
 	 * Holds the picture of the X.
 	 */
-	private final Image picture;
+	//private final Image picture;
 	
 	/**
 	 * Holds the location of the X.
@@ -31,7 +31,7 @@ public class X implements Piece
 	 * 
 	 * @return	Returns the picture of the X.
 	 */
-	public Image getPicture()
+	/*public Image getPicture()
 	{
 		return this.picture;
 	}	//end of getPicture method
