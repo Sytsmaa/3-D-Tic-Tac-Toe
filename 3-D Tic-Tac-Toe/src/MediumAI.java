@@ -1,5 +1,5 @@
 
-public class MediumAI
+public class MediumAI implements Player
 {
 
 }

@@ -1,5 +1,5 @@
 
-public class Human
+public class Human implements Player
 {
 
 }

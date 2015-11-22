@@ -1,5 +1,5 @@
 
-public class Piece
+public interface Piece
 {
 
 }

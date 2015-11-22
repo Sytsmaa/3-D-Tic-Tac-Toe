@@ -1,5 +1,5 @@
 
-public class Y
+public class Y implements Piece
 {
 
 }
