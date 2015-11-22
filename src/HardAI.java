@@ -1,5 +1,5 @@
 
-public class HardAI implements Player
+public class HardAI //implements Player
 {
 
 }
