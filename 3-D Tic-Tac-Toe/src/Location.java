@@ -46,7 +46,6 @@ public class Location
 			throw new InvalidLocationException("Invalid z coordinate:  " + z);
 		}	//end if
 		
-		//set the coordinates of the location
 		this.x = x;
 		this.y = y;
 		this.z = z;

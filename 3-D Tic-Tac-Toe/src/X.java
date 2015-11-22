@@ -8,12 +8,12 @@ public class X implements Piece
 	/**
 	 * Holds the picture of the X.
 	 */
-	private Image picture;
+	private final Image picture;
 	
 	/**
 	 * Holds the location of the X.
 	 */
-	private Location location;
+	private final Location location;
 	
 	/**
 	 * X constructor initializes fields.

@@ -5,12 +5,12 @@ public class O implements Piece
 	/**
 	 * Holds the picture of the O.
 	 */
-	private Image picture;
+	private final Image picture;
 	
 	/**
 	 * Holds the location of the O.
 	 */
-	private Location location;
+	private final Location location;
 	
 	/**
 	 * O constructor initializes fields.
