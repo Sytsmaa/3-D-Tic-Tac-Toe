@@ -1,11 +1,11 @@
 import java.awt.Image;
 
-public class O //implements Piece
+public class O implements Piece
 {
 	/**
 	 * Holds the picture of the O.
 	 */
-	//private final Image picture;
+	private final Image picture;
 	
 	/**
 	 * Holds the location of the O.
@@ -28,7 +28,7 @@ public class O //implements Piece
 	 * 
 	 * @return	Returns the picture of the O.
 	 */
-	/*public Image getPicture()
+	public Image getPicture()
 	{
 		return this.picture;
 	}	//end of getPicture method
