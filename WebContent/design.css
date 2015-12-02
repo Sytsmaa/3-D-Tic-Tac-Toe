@@ -1,0 +1,93 @@
+/* CSS Document */
+
+body
+{
+	background: #222;
+	font-family: Verdana, Geneva, sans-serif;
+}
+
+/**** Wrappers ****/
+
+#content-wrapper
+{
+	margin: 20px auto 15px;
+	padding: 0;
+	width: 1000px;
+}
+
+#inner-wrapper
+{
+	padding: 0;
+	width: inherit;
+	overflow: auto;
+	background: #999;
+}
+
+/**** Header ****/
+
+#header
+{
+	width: inherit;
+	height: 35px;
+	background: #fff;
+	text-align: center;
+	border-radius: 8px 8px 0 0;
+}
+
+/**** Footer ****/
+#footer
+{
+	width: inherit;
+	padding: 0;
+	display: block;
+	background: #666;
+	border-radius: 0 0 8px 8px;
+}
+
+
+/****** Left Side ******/
+/* Used for navigation */
+#left
+{
+	width: 120px;
+	height: inherit;
+	float: left;
+	padding: 0;
+	background: #999;
+}
+
+#left .nav
+{
+	width: 118px;
+	border: 1px solid #000;
+}
+
+.nav a
+{
+	width: 106px;
+	padding: 5px;
+	display: block;
+	border: 1px solid #000;
+}
+
+/**** Right Side ****/
+/* Used for Content */
+#right
+{
+	width: 880px;
+	height: inherit;
+	float: right;
+	padding: 0;
+}
+
+#content
+{
+	width: 850px;
+	padding: 10px 15px 5px;
+	background: #999;
+}
+
+#content p
+{
+	margin: 0 0 10px;
+}
