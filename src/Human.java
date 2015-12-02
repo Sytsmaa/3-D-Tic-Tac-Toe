@@ -30,9 +30,9 @@ public class Human implements Player
 	 */
 	public Human(String username)
 	{
-		//this.wins = get wins from database;
-		//this.losses = get losses from database;
-		//this.ties = get ties from database;
+		//TODO:  this.wins = get wins from database;
+		//TODO:  this.losses = get losses from database;
+		//TODO:  this.ties = get ties from database;
 		this.username = username;
 	}	//end of Human constructor
 	
@@ -53,7 +53,7 @@ public class Human implements Player
 	public void incrementWins()
 	{
 		this.wins += 1;
-		//update database
+		//TODO:  update database
 	}	//end of incrementWins method
 	
 	/**
@@ -63,7 +63,7 @@ public class Human implements Player
 	public void incrementLosses()
 	{
 		this.losses += 1;
-		//update database
+		//TODO:  update database
 	}	//end of incrementLosses method
 	
 	/**
@@ -73,6 +73,6 @@ public class Human implements Player
 	public void incrementTies()
 	{
 		this.ties += 1;
-		//update database
+		//TODO:  update database
 	}	//end of incrementTies method
 }	//end of Human class

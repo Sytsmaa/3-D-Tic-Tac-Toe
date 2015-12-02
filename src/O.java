@@ -1,5 +1,8 @@
 import java.awt.Image;
 
+/**
+ * @author	Andrew Sytsma <asytsma@purdue.edu>
+ */
 public class O implements Piece
 {
 	/**
@@ -19,7 +22,7 @@ public class O implements Piece
 	 */
 	public O(Location location)
 	{
-		//this.picture = picture of an O;
+		//TODO:  this.picture = picture of an O;
 		this.location = location;
 	}	//end of X constructor
 	
