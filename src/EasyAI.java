@@ -1,5 +1,5 @@
 
-public class EasyAI implements Player
+public class EasyAI //implements Player
 {
 
 }

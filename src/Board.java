@@ -125,13 +125,13 @@ public class Board
 			//check which player's turn it is
 			if (this.turn == 1)	//player1's turn
 			{
-				this.player1.incrementWins();
-				this.player2.incrementLosses();
+				//TODO:  Player 1 wins
+				//TODO:  Player 2 loses
 			}
 			else	//player2's turn
 			{
-				this.player2.incrementWins();
-				this.player1.incrementLosses();
+				//TODO:  Player 2 wins
+				//TODO:  Player 1 loses
 			}	//end if
 			
 			//TODO:  Display winner
@@ -139,8 +139,8 @@ public class Board
 		else if (state == 2)	//game is tied
 		{
 			//update the players' statistics
-			this.player1.incrementTies();
-			this.player2.incrementTies();
+			//TODO:  Player 1 ties
+			//TODO:  Player 2 ties
 			
 			//TODO:  Display tie
 		}

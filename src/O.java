@@ -22,6 +22,7 @@ public class O implements Piece
 	 */
 	public O(Location location)
 	{
+		this.picture = null;	//TODO:  Remove this
 		//TODO:  this.picture = picture of an O;
 		this.location = location;
 	}	//end of X constructor
