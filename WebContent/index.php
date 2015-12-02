@@ -16,6 +16,12 @@
 	<h1>
     	3D Tic-Tac-Toe
     </h1>
+    <aside>
+    	<nav>
+        	<a href="login.php">Log In</a> |
+            <a href="signup.php">Sign Up</a>
+        </nav>
+    </aside>
 </header>
 <!-- <div id="content-wrapper">
 	<div id="header">

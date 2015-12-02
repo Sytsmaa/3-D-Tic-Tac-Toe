@@ -36,10 +36,40 @@ header
 	overflow: auto;
 }
 
-/*header h1
+header h1
 {
-	margin: 0;
-}*/
+	display: inline-block;
+}
+
+header aside
+{
+	float: right;
+	padding: 5px 10px;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+header aside nav a
+{
+	text-decoration: none;
+}
+header aside nav a:link
+{
+	color: #00f;
+}
+header aside nav a:visited
+{
+	color: #00f;
+}
+header aside nav a:hover
+{
+	color: #fff;
+}
+header aside nav a:active
+{
+	color: #00f;
+}
 
 #header
 {
