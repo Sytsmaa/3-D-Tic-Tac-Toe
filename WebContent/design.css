@@ -4,6 +4,9 @@ body
 {
 	background: #222;
 	font-family: Verdana, Geneva, sans-serif;
+	padding: 0;
+	margin: 0;
+	border: 0;
 }
 
 /**** Wrappers ****/
@@ -24,6 +27,19 @@ body
 }
 
 /**** Header ****/
+header
+{
+	width: inherit;
+	margin: 0;
+	text-align: center;
+	background: #333;
+	overflow: auto;
+}
+
+/*header h1
+{
+	margin: 0;
+}*/
 
 #header
 {

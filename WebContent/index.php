@@ -12,7 +12,12 @@
 </head>
 
 <body>
-<div id="content-wrapper">
+<header>
+	<h1>
+    	3D Tic-Tac-Toe
+    </h1>
+</header>
+<!-- <div id="content-wrapper">
 	<div id="header">
     	<h1>
         	3D Tic-Tac-Toe
@@ -37,6 +42,6 @@
     <div id="footer">
     	&nbsp;
     </div>
-</div>
+</div> -->
 </body>
 </html>
