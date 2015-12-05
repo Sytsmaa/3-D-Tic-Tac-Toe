@@ -26,11 +26,6 @@ public class Board
 	private Player player2;
 	
 	/**
-	 * Size of the board since it's a cube. Just in case we want to change it later.
-	 */
-	private final int BOARD_SIZE = 4;
-	
-	/**
 	 * Holds all the available moves left on the board still
 	 */
 	private ArrayList<Location> availableMoves;
@@ -44,12 +39,15 @@ public class Board
 	public Board(Player player1, Player player2)
 	{
 		this.turn = 1;
-		this.board = new Piece[BOARD_SIZE][BOARD_SIZE][BOARD_SIZE];
+		this.board = new Piece[4][4][4];
 		this.availableMoves = new ArrayList<>();
-		for (int i = 0; i < BOARD_SIZE; i++) {
-			for (int j = 0; j < BOARD_SIZE; j++) {
-				for (int k = 0; k < BOARD_SIZE; k++) {
-					availableMoves.add(new Location(i, j, k));
+		for (int x = 0; x < 4; x++)
+		{
+			for (int y = 0; y < 4; y++)
+			{
+				for (int z = 0; z < 4; z++)
+				{
+					availableMoves.add(new Location(x, y, z));
 				}
 			}
 		}
@@ -136,6 +134,10 @@ public class Board
 		
 		//put the piece on the board
 		this.board[location.getX()][location.getY()][location.getZ()] = piece;
+		
+		//remove the piece from the list
+		this.availableMoves.remove(location);
+		
 		//TODO:  Put piece on screen
 		
 		int state = isGameOver(piece.getClass());	//holds the state of the game
@@ -147,13 +149,13 @@ public class Board
 			//check which player's turn it is
 			if (this.turn == 1)	//player1's turn
 			{
-				this.player1.incrementWins();
-				this.player2.incrementLosses();
+				//player1 wins
+				//player2 losses
 			}
 			else	//player2's turn
 			{
-				this.player2.incrementWins();
-				this.player1.incrementLosses();
+				//player2 wins
+				//player1 losses
 			}	//end if
 			
 			//TODO:  Display winner
@@ -161,8 +163,7 @@ public class Board
 		else if (state == 2)	//game is tied
 		{
 			//update the players' statistics
-			this.player1.incrementTies();
-			this.player2.incrementTies();
+			//it's a tie
 			
 			//TODO:  Display tie
 		}
@@ -486,9 +487,11 @@ public class Board
 	
 	/**
 	 * Get the available moves still left on the board.
-	 * @return The available moves
+	 * 
+	 * @return	The available moves
 	 */
-	public ArrayList<Location> getAvailableMoves() {
-		return availableMoves;
+	public ArrayList<Location> getAvailableMoves()
+	{
+		return this.availableMoves;
 	}
 }	//end of Board class
