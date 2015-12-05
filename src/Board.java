@@ -493,5 +493,5 @@ public class Board
 	public ArrayList<Location> getAvailableMoves()
 	{
 		return this.availableMoves;
-	}
+	}	//end of getAvailableMoves method
 }	//end of Board class
