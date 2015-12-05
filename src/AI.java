@@ -1,7 +1,16 @@
+import java.util.Random;
+import java.util.ArrayList;
+
 public class AI implements Player {
 	
 	/**
-	* The simplest AI level. This AI just plays randomly, and will
+	* The simplest AI level. This AI just plays randomly and won't even attempt to win.
+	* It's like playing a two year old.
+	*/
+	public static final int AI_LEVEL_CASUAL = 0;
+	
+	/**
+	* The simple AI level. This AI just plays randomly, and will
 	* only attempt to win if it manages to have all but one piece
 	* in a line.
 	*/
@@ -34,26 +43,41 @@ public class AI implements Player {
 	}
 	
 	public AI(int level) {
-		this.level = level;
+		//This is to make sure a valid level is passed
+		switch(level) {
+			case AI_LEVEL_CASUAL:
+				this.level = AI_LEVEL_CASUAL;
+			case AI_LEVEL_EASY:
+				this.level = AI_LEVEL_EASY;
+			case AI_LEVEL_MEDIUM:
+				this.level = AI_LEVEL_MEDIUM;
+			case AI_LEVEL_HARD:
+				this.level = AI_LEVEL_HARD;
+			case AI_LEVEL_IMPOSSIBLE:
+			default:
+				this.level = AI_LEVEL_IMPOSSIBLE;
+		}
 	}
 	
 	public String getUsername() {
 		String aiTitle = "AI - ";
 		switch(level) {
+			case AI_LEVEL_CASUAL:
+				return aiTitle + "Casual";
 			case AI_LEVEL_EASY:
-				return aiTitle + "Easy"
-			case AI_LEVEL_MEDIUM;
-				return aiTitle + "Medium"
-			case AI_LEVEL_HARD;
-				return aiTitle + "Hard"
-			case AI_LEVEL_IMPOSSIBLE;
-				return aiTitle + "Impossible"
+				return aiTitle + "Easy";
+			case AI_LEVEL_MEDIUM:
+				return aiTitle + "Medium";
+			case AI_LEVEL_HARD:
+				return aiTitle + "Hard";
+			case AI_LEVEL_IMPOSSIBLE:
+				return aiTitle + "Impossible";
 		}
 		return aiTitle + "Unknown";
 	}
 	
 	public void incrementWins() {
-			
+		
 	}
 	
 	public void incrementLosses() {
@@ -64,4 +88,8 @@ public class AI implements Player {
 		
 	}
 	
+	public Location getNextMove(Board b) {
+		if (level == AI_LEVEL_CASUAL) return b.getAvailableMoves().get(new Random().nextInt(b.getAvailableMoves().size())); //Just pick a random location. Who cares?
+		return null;
+	}
 }

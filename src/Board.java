@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * @author	Andrew Sytsma <asytsma@purdue.edu>
@@ -25,6 +26,16 @@ public class Board
 	private Player player2;
 	
 	/**
+	 * Size of the board since it's a cube. Just in case we want to change it later.
+	 */
+	private final int BOARD_SIZE = 4;
+	
+	/**
+	 * Holds all the available moves left on the board still
+	 */
+	private ArrayList<Location> availableMoves;
+	
+	/**
 	 * Board constructor initializes fields
 	 * 
 	 * @param player1	Holds a reference to the first player.
@@ -33,7 +44,15 @@ public class Board
 	public Board(Player player1, Player player2)
 	{
 		this.turn = 1;
-		this.board = new Piece[4][4][4];
+		this.board = new Piece[BOARD_SIZE][BOARD_SIZE][BOARD_SIZE];
+		this.availableMoves = new ArrayList<>();
+		for (int i = 0; i < BOARD_SIZE; i++) {
+			for (int j = 0; j < BOARD_SIZE; j++) {
+				for (int k = 0; k < BOARD_SIZE; k++) {
+					availableMoves.add(new Location(i, j, k));
+				}
+			}
+		}
 		this.player1 = player1;
 		this.player2 = player2;
 	}	//end of Board constructor
@@ -112,6 +131,9 @@ public class Board
 			piece = new O(location);
 		}	//end if
 		
+		//remove the location from the available locations
+		availableMoves.remove(location);
+		
 		//put the piece on the board
 		this.board[location.getX()][location.getY()][location.getZ()] = piece;
 		//TODO:  Put piece on screen
@@ -125,13 +147,13 @@ public class Board
 			//check which player's turn it is
 			if (this.turn == 1)	//player1's turn
 			{
-				//TODO:  Player 1 wins
-				//TODO:  Player 2 loses
+				this.player1.incrementWins();
+				this.player2.incrementLosses();
 			}
 			else	//player2's turn
 			{
-				//TODO:  Player 2 wins
-				//TODO:  Player 1 loses
+				this.player2.incrementWins();
+				this.player1.incrementLosses();
 			}	//end if
 			
 			//TODO:  Display winner
@@ -139,8 +161,8 @@ public class Board
 		else if (state == 2)	//game is tied
 		{
 			//update the players' statistics
-			//TODO:  Player 1 ties
-			//TODO:  Player 2 ties
+			this.player1.incrementTies();
+			this.player2.incrementTies();
 			
 			//TODO:  Display tie
 		}
@@ -461,4 +483,12 @@ public class Board
 		
 		return true;
 	}	//end of check3DDiagonals method
+	
+	/**
+	 * Get the available moves still left on the board.
+	 * @return The available moves
+	 */
+	public ArrayList<Location> getAvailableMoves() {
+		return availableMoves;
+	}
 }	//end of Board class
