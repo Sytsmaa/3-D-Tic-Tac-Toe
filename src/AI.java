@@ -75,19 +75,7 @@ public class AI implements Player {
 		}
 		return aiTitle + "Unknown";
 	}
-	
-	public void incrementWins() {
-		
-	}
-	
-	public void incrementLosses() {
-		
-	}
-	
-	public void incrementTies() {
-		
-	}
-	
+
 	public Location getNextMove(Board b) {
 		if (level == AI_LEVEL_CASUAL) return b.getAvailableMoves().get(new Random().nextInt(b.getAvailableMoves().size())); //Just pick a random location. Who cares?
 		return null;
