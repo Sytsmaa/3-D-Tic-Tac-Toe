@@ -41,6 +41,8 @@ public class Board
 		this.turn = 1;
 		this.board = new Piece[4][4][4];
 		this.availableMoves = new ArrayList<>();
+		
+		//populate the available moves
 		for (int x = 0; x < 4; x++)
 		{
 			for (int y = 0; y < 4; y++)
@@ -48,9 +50,10 @@ public class Board
 				for (int z = 0; z < 4; z++)
 				{
 					availableMoves.add(new Location(x, y, z));
-				}
-			}
-		}
+				}	//end for
+			}	//end for
+		}	//end for
+		
 		this.player1 = player1;
 		this.player2 = player2;
 	}	//end of Board constructor
