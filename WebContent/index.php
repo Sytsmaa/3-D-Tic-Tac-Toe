@@ -2,7 +2,7 @@
 <html lang="en-US" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta charset="utf-8" />
-<link rel="stylesheet" href="design.css" />
+<link rel="stylesheet" href="layout/design.css" />
 
 <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -23,6 +23,19 @@
         </nav>
     </aside>
 </header>
+<section id="content">
+	<aside>
+    	<ul>
+        	<li>Casual:<br />W-0, L-0, T-0</li>
+        	<li>Easy:<br />W-0, L-0, T-0</li>
+            <li>Medium:<br />W-0, L-0, T-0</li>
+            <li>Hard:<br />W-0, L-0, T-0</li>
+            <li>Impossible:<br />W-0, L-0, T-0</li>
+        </ul>
+    </aside>
+    <div id="game">
+    </div>
+</section>
 <!-- <div id="content-wrapper">
 	<div id="header">
     	<h1>
