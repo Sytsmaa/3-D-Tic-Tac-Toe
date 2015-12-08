@@ -497,4 +497,14 @@ public class Board
 	{
 		return this.availableMoves;
 	}	//end of getAvailableMoves method
+	
+	/**
+	 * Returns a reference to the board array.
+	 * 
+	 * @return	Returns a reference to the board array.
+	 */
+	public Piece[][][] getBoard()
+	{
+		return this.board;
+	}	//end of getBoard method
 }	//end of Board class
