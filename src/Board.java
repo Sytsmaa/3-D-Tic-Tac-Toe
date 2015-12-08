@@ -132,9 +132,6 @@ public class Board
 			piece = new O(location);
 		}	//end if
 		
-		//remove the location from the available locations
-		availableMoves.remove(location);
-		
 		//put the piece on the board
 		this.board[location.getX()][location.getY()][location.getZ()] = piece;
 		

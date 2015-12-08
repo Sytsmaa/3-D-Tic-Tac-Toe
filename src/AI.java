@@ -35,13 +35,21 @@ public class AI implements Player {
 	public static final int AI_LEVEL_IMPOSSIBLE = 4;
 	
 	//Private fields about the AI
-	public int level;
+	private int level;
+	private Piece piece;
 	
+	/**
+	 * The default constructor for an AI. Assumes medium difficulty
+	 */
 	public AI() {
 		//We'll assume medium is the default, just in case.
 		this(AI_LEVEL_MEDIUM);
 	}
 	
+	/**
+	 * Constructor for the AI
+	 * @param level The level the AI will be. These are statically defined in the AI class
+	 */
 	public AI(int level) {
 		//This is to make sure a valid level is passed
 		switch(level) {
@@ -59,6 +67,10 @@ public class AI implements Player {
 		}
 	}
 	
+	/**
+	 * Get the username for the AI.
+	 * @return The username for the AI
+	 */
 	public String getUsername() {
 		String aiTitle = "AI - ";
 		switch(level) {
@@ -73,11 +85,87 @@ public class AI implements Player {
 			case AI_LEVEL_IMPOSSIBLE:
 				return aiTitle + "Impossible";
 		}
+		//This should be impossible
 		return aiTitle + "Unknown";
 	}
-
+	
+	/**
+	 * Get the next move the AI will make
+	 * @param b The board the AI is playing on
+	 * @return The location the AI will play next
+	 */
 	public Location getNextMove(Board b) {
-		if (level == AI_LEVEL_CASUAL) return b.getAvailableMoves().get(new Random().nextInt(b.getAvailableMoves().size())); //Just pick a random location. Who cares?
+		Location l;
+		if (level == AI_LEVEL_CASUAL) {
+			//Get a random move
+			l = randomMove(b); //Just pick a random location. Who cares?
+		}
+		else if (level == AI_LEVEL_EASY) {
+			//We look for a winning move, else play randomly
+			l = winningMove(b);
+			if (l == null) l = randomMove(b);
+		}
+		else if (level == AI_LEVEL_MEDIUM) {
+			//We look for a winning move, else we block if we have a certain threshold, else we play randomly
+			Location l = winningMove(b);
+			if (l == null && Math.random() <= .5) l = blockOpponent(b);
+			else l = randomMove(b);
+		}
+		else if (level == AI_LEVEL_HARD) {
+			//We look for a winning move, else we try to block, else we play randomly
+			l = winningMove(b);
+			if (l == null) l = blockOpponent(b);
+			if (l == null) l = randomMove(b);
+		}
+		else {
+			//This would be the impossible AI, which needs to have a lot of thinking done
+		}
+		return l;
+	}
+	
+	/**
+	 * Search the board for a winning move
+	 * @param b The board the AI is playing on
+	 * @return The move the AI will take to win the game, or null if the AI can't win yet.
+	 */
+	private Location winningMove(Board b) {
+		Class piece;
+		//If the current turn is one, it is Xs turn. That means the AI is X
+		if (b.getTurn() == 1) piece = X.class;
+		else piece = O.class;
+		//No winning move
 		return null;
+	}
+	
+	/**
+	 * Search the board for a move to block the opponent
+	 * @param b The board the AI is playing on
+	 * @return The move the AI will take to block the opponent, or null if there is nothing to block yet
+	 */
+	private Location blockOpponent(Board b) {
+		Class opponent;
+		//If the current turn is 1, it is Xs turn. That means the opponent is O. The converse is true
+		if (b.getTurn() == 1) opponent = O.class;
+		else opponent = X.class;
+		Piece[][][] board = b.getBoard();
+		for (int x = 0; x < board.length; x++) {
+			for (int y = 0; y < board[x].length; y++) {
+				for (int z = 0; z < board[x][y].length; z++) {
+					
+				}
+			}
+		}
+		//Nothing to block
+		return null;
+	}
+	
+	/**
+	 * Get a random location on the board to play
+	 * @param b The board the AI is playing on
+	 * @return A random location on the board that is still free.
+	 */
+	private Location randomMove(Board b) {
+		//This is kind of bad due to making a new random object every time, but it should be okay due to a small size
+		return b.getAvailableMoves().get(new Random().nextInt(b.getAvailableMoves().size()));
 	}
 }
