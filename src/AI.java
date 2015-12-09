@@ -132,7 +132,7 @@ public class AI implements Player {
 	 * @return The move the AI will take to win the game, or null if the AI can't win yet.
 	 */
 	private Location winningMove(Board b) {
-		Class piece;
+		Piece piece;
 		//If the current turn is one, it is Xs turn. That means the AI is X
 		if (b.getTurn() == 1) piece = new X(new Location(0,0,0));
 		else piece = new O(new Location(0,0,0));
@@ -168,8 +168,8 @@ public class AI implements Player {
 	private Location blockOpponent(Board b) {
 		Piece opponent;
 		//If the current turn is 1, it is Xs turn. That means the opponent is O. The converse is true
-		if (b.getTurn() == 1) opponent = new O(new Location(0,0,0)));
-		else opponent = new X(new Location(0,0,0)));
+		if (b.getTurn() == 1) opponent = new O(new Location(0,0,0));
+		else opponent = new X(new Location(0,0,0));
 		Piece[][][] board = b.getBoard();
 		
 		//Try every free space on the board for the opponent winning move. This isn't efficient either, but still simplest approach
