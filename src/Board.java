@@ -507,4 +507,37 @@ public class Board
 	{
 		return this.board;
 	}	//end of getBoard method
+	
+	/**
+	 * Returns a number representing the state of the game.
+	 * 0 = Not Game Over
+	 * 1 = Game Over
+	 * 2 = Tie
+	 * 
+	 * @param testBoard	The Board to test.
+	 * @param turn		A number representing the player's turn.
+	 * @return			Returns a number representing the state of the game.
+	 */
+	public int testBoard(Piece[][][] testBoard, int turn)
+	{
+		Piece[][][] oldBoard = this.board;	//Holds a reference to the old board.
+		this.board = testBoard;				//Sets the board to the test board.
+		int result;							//Holds the result of the test.
+		
+		//check which player's turn it is
+		if (turn == 1)	//player1's turn
+		{
+			//check for a win with X's
+			result = isGameOver(new X(new Location(0, 0, 0)).getClass());
+		}
+		else	//player2's turn
+		{
+			//check for a win with O's
+			result = isGameOver(new O(new Location(0, 0, 0)).getClass());
+		}	//end if
+		
+		this.board = oldBoard;	//reset the board
+		
+		return result;
+	}	//end of testBoard method
 }	//end of Board class
