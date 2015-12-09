@@ -1,7 +1,28 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+<?php
+session_start();
+require_once($homeDir . "database/data.php");
+?>
+<!DOCTYPE html>
+<html lang="en-US" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Untitled Document</title>
+<meta charset="utf-8" />
+<link rel="stylesheet" href="<?php echo $homeDir; ?>layout/design.css" />
+
+<!--[if lt IE 9]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+
+<title><?php echo $title;?></title>
 </head>
+
 <body>
+<header>
+	<a href="<?php echo $homeDir;?>index.php"><h1>3D Tic-Tac-Toe</h1></a>
+    <aside>
+    	<nav>
+        	<a href="<?php echo $homeDir; ?>login.php">Log In</a> |
+            <a href="<?php echo $homeDir; ?>signup.php">Sign Up</a>
+        </nav>
+    </aside>
+</header>
+<section id="content">

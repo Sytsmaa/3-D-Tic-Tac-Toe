@@ -3,7 +3,7 @@
 body
 {
 	background: #222;
-	font-family: Verdana, Geneva, sans-serif;
+	font-family: "Courier New", Courier, monospace;
 	padding: 0;
 	margin: 0;
 	border: 0;
@@ -29,16 +29,36 @@ body
 /**** Header ****/
 header
 {
+	height: 79px;
 	width: inherit;
 	margin: 0;
 	text-align: center;
 	background: #333;
+	overflow: visible;
+}
+
+header a h1
+{
+	display: inline-block;
+}
+
+header a
+{
+	min-height: 79px;
+	background: #333;
+	text-decoration: none;
+	color: #000;
 	overflow: auto;
 }
 
-header h1
+header a:hover
 {
-	display: inline-block;
+	background: #ddd;
+}
+
+header a:active
+{
+	background: #ddd;
 }
 
 header aside
@@ -148,6 +168,34 @@ header aside nav a:active
 {
 	width: 600px;
 	height: 600px;
-	margin: 20px auto;
+	margin: 20px 120px 20px 0;
+	float: right;
 	background: #000;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	color: #00d800;
+}
+
+#game h1
+{
+	align-self: center;
+	font-size: 40px;
+	margin-bottom: 0;
+}
+
+#game #center
+{
+	align-self: center;
+}
+
+#game button
+{
+	background: none;
+	border: 4px solid #00d800;
+	color: #00d800;
+	font-family: "Courier New", Courier, monospace;
+	font-size: 36px;
+	display: block;
+	margin: 20px auto;
 }
