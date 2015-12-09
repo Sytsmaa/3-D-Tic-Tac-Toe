@@ -121,7 +121,8 @@ public class AI implements Player {
 			//This would be the impossible AI, which needs to have a lot of thinking done
 			//For now, have it play randomly like the AI_LEVEL_CASUAL so things don't break
 			//This is just to make it simple so we can have testing done
-			l = randomMove(b);
+			l = getOptimalMove(b);
+			
 		}
 		return l;
 	}
@@ -201,5 +202,85 @@ public class AI implements Player {
 	private Location randomMove(Board b) {
 		//This is kind of bad due to making a new random object every time, but it should be okay due to a small size
 		return b.getAvailableMoves().get(new Random().nextInt(b.getAvailableMoves().size()));
+	}
+	
+	/**
+	 * Get the optimal move that the AI can make. This is used by the impossible AI to ensure it cannot lose.
+	 * The function getWeightOfMove will get the highest weighing move.
+	 * @param b The board the AI is playing on
+	 * @return The optimal location the AI can play.
+	 */
+	private Location getOptimalMove(Board b) {
+		Piece piece;
+		//If the current turn is one, it is Xs turn. That means the AI is X
+		if (b.getTurn() == 1) piece = new X(new Location(0,0,0));
+		else piece = new O(new Location(0,0,0));
+		Piece[][][] board = b.getBoard();
+		
+		//This should never return null. Something is wrong if it does
+		Location bestLocation = null;
+		int bestWeight = Integer.MIN_VALUE;
+		for (int x = 0; x < board.length; x++) {
+			for (int y = 0; y < board[x].length; y++) {
+				for (int z = 0; z < board[x][y].length; z++) {
+					if (board[x][y][z] == null) {
+						//This is a valid move
+						board[x][y][z] = piece;
+						int weight = getWeightOfMove(board, b, b.getTurn() % 2);
+						if (weight > bestWeight) {
+							bestWeight = weight;
+							bestLocation = new Location(x, y, z);
+						}
+						board[x][y][z] = null;
+					}
+				}
+			}
+		}
+		return bestLocation;
+	}
+	
+	/**
+	 * Get the weight of a move. If the game is not over yet, the function will recurse until it is.
+	 * @param board The board array the AI is playing on
+	 * @param b A board object to test the board
+	 * @param turn The turn of the board (because the board object won't be accurate)
+	 * @return -1 if the opponent wins, 0 if a tie, 1 if the AI wins
+	 */
+	private int getWeightOfMove(Piece[][][] board, Board b, int turn) {
+		//Note, b.getTurn() will tell us which player the AI is
+		//Example, b.getTurn() is 1. AI is player 1. if turn is 0, AI won.
+		int result = b.testBoard(board, turn + 1);
+		if (result == 0) {
+			//Game is not over
+			Piece piece;
+			int weight = 0;
+			if (turn == 0) piece = new X(new Location(0,0,0));
+			else piece = new O(new Location(0,0,0));
+			for (int x = 0; x < board.length; x++) {
+				for (int y = 0; y < board[x].length; y++) {
+					for (int z = 0; z < board[x][y].length; z++) {
+						if (board[x][y][z] == null) {
+							//This is a valid move
+							board[x][y][z] = piece;
+							weight += getWeightOfMove(board, b, (turn + 1) % 2);
+							board[x][y][z] = null;
+						}
+					}
+				}
+			}
+			return weight;
+		}
+		else if (result == 1 && turn == b.getTurn() - 1) {
+			//Game is over and the AI won
+			return 1;
+		}
+		else if (result == 1 && turn != b.getTurn() - 1) {
+			//Game is over and the AI lost
+			return -1;
+		}
+		else {
+			//Game is tied
+			return 0;
+		}
 	}
 }
