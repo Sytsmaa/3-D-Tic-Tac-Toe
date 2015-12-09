@@ -107,7 +107,7 @@ public class AI implements Player {
 		}
 		else if (level == AI_LEVEL_MEDIUM) {
 			//We look for a winning move, else we block if we have a certain threshold, else we play randomly
-			Location l = winningMove(b);
+			l = winningMove(b);
 			if (l == null && Math.random() <= .5) l = blockOpponent(b);
 			else l = randomMove(b);
 		}
@@ -119,6 +119,9 @@ public class AI implements Player {
 		}
 		else {
 			//This would be the impossible AI, which needs to have a lot of thinking done
+			//For now, have it play randomly like the AI_LEVEL_CASUAL so things don't break
+			//This is just to make it simple so we can have testing done
+			l = randomMove(b);
 		}
 		return l;
 	}
@@ -131,9 +134,29 @@ public class AI implements Player {
 	private Location winningMove(Board b) {
 		Class piece;
 		//If the current turn is one, it is Xs turn. That means the AI is X
-		if (b.getTurn() == 1) piece = X.class;
-		else piece = O.class;
-		//No winning move
+		if (b.getTurn() == 1) piece = new X(new Location(0,0,0));
+		else piece = new O(new Location(0,0,0));
+		Piece[][][] board = b.getBoard();
+		
+		//Try every free space on the board for a winning move. This isn't exactly efficient but it's the simplest approach
+		for (int x = 0; x < board.length; x++) {
+			for (int y = 0; y < board[x].length; y++) {
+				for (int z = 0; z < board[x][y].length; z++) {
+					if (board[x][y][z] == null) {
+						//The space is free, put a piece there and test it
+						board[x][y][z] = piece;
+						if (b.testBoard(board, b.getTurn()) == 1) {
+							//This is a winning move and the AI should take it
+							board[x][y][z] = null; //Set it back in case
+							return new Location(x, y, z);
+						}
+						board[x][y][z] = null; //Set it back just int case
+					}
+				}
+			}
+		}
+		
+		//No winning move available
 		return null;
 	}
 	
@@ -143,15 +166,26 @@ public class AI implements Player {
 	 * @return The move the AI will take to block the opponent, or null if there is nothing to block yet
 	 */
 	private Location blockOpponent(Board b) {
-		Class opponent;
+		Piece opponent;
 		//If the current turn is 1, it is Xs turn. That means the opponent is O. The converse is true
-		if (b.getTurn() == 1) opponent = O.class;
-		else opponent = X.class;
+		if (b.getTurn() == 1) opponent = new O(new Location(0,0,0)));
+		else opponent = new X(new Location(0,0,0)));
 		Piece[][][] board = b.getBoard();
+		
+		//Try every free space on the board for the opponent winning move. This isn't efficient either, but still simplest approach
 		for (int x = 0; x < board.length; x++) {
 			for (int y = 0; y < board[x].length; y++) {
 				for (int z = 0; z < board[x][y].length; z++) {
-					
+					if (board[x][y][z] == null) {
+						//The space is free, test it
+						board[x][y][z] = opponent;
+						if (b.testBoard(board, b.getTurn()) == 1) {
+							//That move can end the game, so we need to block it
+							board[x][y][z] = null; //Set it back just in case
+							return new Location(x, y, z);
+						}
+						board[x][y][z] = null; //Set it back
+					}
 				}
 			}
 		}
