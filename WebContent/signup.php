@@ -102,6 +102,7 @@
 				{
 					//debugging
 					echo $row["username"] . " " . $row["password"] . "\n";
+					echo "do . . . while\n";
 					
 					if($row["username"] == $username)
 					{
