@@ -84,9 +84,12 @@
 		{
 			//check for existing username or e-mail
 			require_once("database/data.php");
-			$queryResults = query($userData, "SELECT username, email FROM users WHERE username='" . $username . "' OR email='" . $email . "'");
+			$sql = "SELECT username, email FROM users WHERE username='" . $username . "' OR email='" . $email . "'";
+			//$queryResults = query($userData, $sql);
+			$queryResults = db2_exec($userdata, $sql);
 			
-			if(!($queryResults === false) && numRows($queryResults) > 0)
+			//if(!($queryResults === false) && numRows($queryResults) > 0)
+			if(!($queryResults === false) && db2_num_rows($queryResults) > 0)
 			{
 				//debug
 				echo "<p>has at least one row</p>";
@@ -95,7 +98,8 @@
 				$usernameTaken = false;
 				$emailTaken = false;
 				
-				while($row = nextRow($queryResults))
+				//while($row = nextRow($queryResults))
+				while($row = db2_fetch_assoc($queryResults))
 				{
 					//debugging
 					echo "<p>" . $row["username"] . " " . $row["password"] . "</p>";
@@ -133,7 +137,8 @@
 			//create account
 			$sql = "INSERT INTO users (username, password, email) VALUES ('" . $username . "', '" . $hash . "', '" . $email . "')";
 			
-			query($userData, $sql);
+			//query($userData, $sql);
+			db2_exec($userdata, $sql);
 		
 			//set session variables
 			session_start();
