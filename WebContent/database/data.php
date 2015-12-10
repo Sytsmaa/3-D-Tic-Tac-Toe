@@ -43,7 +43,7 @@
 	
 	function query($sqlQuery)
 	{
-		$prepared = db2_prepare($userdata,$sqlQuery);
+		/*$prepared = db2_prepare($userdata,$sqlQuery);
 		if(db2_execute($prepared))
 		{
 			return $prepared;
@@ -51,7 +51,8 @@
 		else
 		{
 			return false;
-		}
+		}*/
+		return db2_exec($userdata, $sqlQuery);
 		//return mysqli_query($userData, $sqlQuery);
 	}
 	
