@@ -84,15 +84,18 @@
 		{
 			//check for existing username or e-mail
 			require_once("database/data.php");
-			$queryResults = mysqli_query($userData, "SELECT username, email FROM users WHERE username='" . $username . "' OR email='" . $email . "'");
+			$queryResults = query($userData, "SELECT username, email FROM users WHERE username='" . $username . "' OR email='" . $email . "'");
 			
-			if(!($queryResults === false) && mysqli_num_rows($queryResults) > 0)
+			$row = nextRow($queryResults);
+			if($row !== false)
+			//if(!($queryResults === false) && mysqli_num_rows($queryResults) > 0)
 			{
 				$valid = false;
 				$usernameTaken = false;
 				$emailTaken = false;
 				
-				while($row = mysqli_fetch_assoc($queryResults))
+				do
+				//while($row = mysqli_fetch_assoc($queryResults))
 				{
 					if($row["username"] == $username)
 					{
@@ -103,7 +106,7 @@
 					{
 						$emailTaken = true;
 					}
-				}
+				} while($row = nextRow($queryResults));
 				
 				if($usernameTaken)
 				{
@@ -124,9 +127,9 @@
 			$hash = hashPassword($password);
 			
 			//create account
-			//$sql = "INSERT INTO users (username, password, email) VALUES ('" . $username . "', '" . $hash . "', '" . $email . "')";
-			$sql = "INSERT INTO users (username, password, email, casualWins, casualLosses, casualTies, easyWins, easyLosses, easyTies, mediumWins, mediumLosses, mediumTies, hardWins, hardLosses, hardTies, impossibleWins, impossibleLosses, impossibleTies) VALUES ('" . $username . "', '" . $hash . "', '" . $email . "', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')";
-			mysqli_query($userData, $sql);
+			$sql = "INSERT INTO users (username, password, email) VALUES ('" . $username . "', '" . $hash . "', '" . $email . "')";
+			
+			query($userData, $sql);
 		
 			//set session variables
 			session_start();

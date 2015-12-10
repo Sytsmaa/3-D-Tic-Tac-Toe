@@ -24,16 +24,18 @@
 			//get user information
 			require_once("database/data.php");
 			$sql = "SELECT * FROM users WHERE username='" . $username . "' LIMIT 1";
-			$queryResult = mysqli_query($userData, $sql);
+			$queryResult = query($userData, $sql);
 			
-			if($queryResult === false)//mysqli_num_rows($queryResult) === 0)
+			$row = nextRow($queryResult);
+			if($row !== false)
+			//if($queryResult === false)//mysqli_num_rows($queryResult) === 0)
 			{
 				$valid = false;
 				$loginError = "That username and password combination does not exist.";
 			}
 			else
 			{
-				$row = mysqli_fetch_assoc($queryResult);
+				//$row = mysqli_fetch_assoc($queryResult);
 				$hashedPassword = $row["password"];
 				
 				if(!isPassword($password, $hashedPassword))
