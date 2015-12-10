@@ -154,7 +154,7 @@
 		}
 	}
 	
-	$title = "Login";
+	$title = "Signup";
 	$homeDir = "";
 	require_once("layout/header.php");
 ?>

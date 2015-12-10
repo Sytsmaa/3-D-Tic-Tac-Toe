@@ -57,7 +57,7 @@
 	
 	function nextRow($queryResult)
 	{
-		return db2_fetch_row($queryResult);
+		return db2_fetch_assoc($queryResult);
 		//return mysqli_fetch_assoc($queryResult);
 	}
 	
