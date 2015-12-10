@@ -29,5 +29,5 @@
 </html>
 <?php
 	//close();
-	db2_close();
+	db2_close($userData);
 ?>
