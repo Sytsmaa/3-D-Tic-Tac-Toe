@@ -1,5 +1,10 @@
 <?php
 	$signupError = "&nbsp;";
+	
+	//values to autofill
+	$username = "";
+	$email = "";
+	
 	if(isset($_POST["username"]) && isset($_POST["password"]) && isset($_POST["password2"]) && isset($_POST["email"]))
 	{
 		//set variables
@@ -20,26 +25,107 @@
 			}
 		}
 		
+		if($valid && strlen($password) < 6)
+		{
+			$valid = false;
+			$signupError = "Password must be at least 6 characters long.";
+		}
+		
+		//compare entered passwords
+		if($valid && $password !== $password2)
+		{
+			$signupError = "Passwords did not match";
+			$valid = false;
+		}
+		
+		//check password for rules
+		if($valid)
+		{
+			$hasUpper = false;
+			$hasLower = false;
+			$hasNum = false;
+			$hasSpecial = false;
+			for($x = 0; $x < strlen($password); $x++)
+			{
+				$char = substr($password, $x, 1);
+				
+				if(ctype_upper($char))
+				{
+					$hasUpper = true;
+				}
+				else if(ctype_lower($char))
+				{
+					$hasLower = true;
+				}
+				else if(ctype_digit($char))
+				{
+					$hasNum = true;
+				}
+				else
+				{
+					$hasSpecial = true;
+				}
+			}
+			
+			if(!$hasLower || !$hasNum || !$hasSpecial || !$hasUpper)
+			{
+				$valid = false;
+				$signupError = "Your password must contain at least one upper-case letter, one lower-case letter, one number, and one special character";
+			}
+		}
+		
+		//try to prevent injections
+		require_once("scripts/security.php");
+		$username = preventInjection($username);
+		$email = preventInjection($email);
+		
 		//check for user
 		if($valid)
 		{
 			//check for existing username or e-mail
+			require_once("database/data.php");
+			$queryResults = mysqli_query($userData, "SELECT username, email FROM users WHERE username='" . $username . "' OR email='" . $email . "'");
 			
+			if(!($queryResults === false) && mysqli_num_rows($queryResults) > 0)
+			{
+				$valid = false;
+				$usernameTaken = false;
+				$emailTaken = false;
+				
+				while($row = mysqli_fetch_assoc($queryResults))
+				{
+					if($row["username"] == $username)
+					{
+						$usernameTaken = true;
+					}
+					
+					if($row["email"] == $email)
+					{
+						$emailTaken = true;
+					}
+				}
+				
+				if($usernameTaken)
+				{
+					$signupError = "That username has already been taken. ";
+				}
+				
+				if($emailTaken)
+				{
+					$signupError = $signupError . "That e-mail has already been taken.";
+				}
+			}
+		}
+		
+		//create user
+		if($valid)
+		{
 			//encrypt password
-			// A higher "cost" is more secure but consumes more processing power
-			$cost = 10;
-			
-			// Create a random salt
-			$salt = strtr(base64_encode(mcrypt_create_iv(16, MCRYPT_DEV_URANDOM)), '+', '.');
-			
-			// Prefix information about the hash so PHP knows how to verify it later.
-			// "$2a$" Means we're using the Blowfish algorithm. The following two digits are the cost parameter.
-			$salt = sprintf("$2a$%02d$", $cost) . $salt;
-			
-			// Hash the password with the salt
-			$hash = crypt($password, $salt);
+			$hash = hashPassword($password);
 			
 			//create account
+			$sql = "INSERT INTO users (username, password, email) VALUES ('" . $username . "', '" . $hash . "', '" . $email . "')";
+			mysqli_query($userData, $sql);
 		
 			//set session variables
 			session_start();
@@ -63,17 +149,17 @@
 	require_once("layout/header.php");
 ?>
 <p style="margin: 20px auto 5px;"><?php echo $signupError;?></p>
-<form name="login" method="post" action="login.php">
+<form name="login" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 	<table style="margin: 0 auto 20px;">
     	<tr>
         	<td>Username: </td>
-            <td><input name="username" type="text" maxlength="32" required /></td>
+            <td><input name="username" type="text" value="<?php echo $username;?>" maxlength="32" required /></td>
             <td>&nbsp;</td>
         </tr>
         <tr>
         	<td>Password: </td>
             <td><input name="password" type="password" required /></td>
-            <td>Note: For your own security, do not use a password used for other accounts.</td>
+            <td>Note: For your own security, do not use a password used for other accounts. For your security, your password cannot be changed as of right now.</td>
         </tr>
         <tr>
         	<td>Re-enter Password: </td>
@@ -81,7 +167,7 @@
         </tr>
         <tr>
         	<td>E-Mail: </td>
-            <td><input name="email" type="email" maxlength="32" required /></td>
+            <td><input name="email" type="email" value="<?php echo $email;?>" maxlength="32" required /></td>
             <td>Note: This is only to prevent users having unlimited accounts. We will not share or use this information</td>
         </tr>
         <tr>

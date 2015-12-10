@@ -28,8 +28,5 @@
 </body>
 </html>
 <?php
-	if(!isset($doNotClose))
-	{
-		//mysqli_close($userData);
-	}
+	mysqli_close($userData);
 ?>

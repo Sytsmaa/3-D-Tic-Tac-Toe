@@ -17,14 +17,52 @@
 		//check for user
 		if($valid)
 		{
-			//continue validation
+			//prevent injection
+			require_once("scripts/security.php");
+			$username = preventInjection($username);
+			
+			//get user information
+			require_once("database/data.php");
+			$sql = "SELECT * FROM users WHERE username='" . $username . "' LIMIT 1";
+			$queryResult = mysqli_query($userData, $sql);
+			
+			if($queryResult === false)//mysqli_num_rows($queryResult) === 0)
+			{
+				$valid = false;
+				$loginError = "That username and password combination does not exist.";
+			}
+			else
+			{
+				$row = mysqli_fetch_assoc($queryResult);
+				$hashedPassword = $row["password"];
+				
+				if(!isPassword($password, $hashedPassword))
+				{
+					$valid = false;
+					$loginError = "That username and password combination does not exist.";
+				}
+				
+				//set session values
+				if($valid)
+				{
+					//set session variables
+					session_start();
+					
+					//set username
+					$_SESSION["username"] = $username;
+					
+					//set statistics
+					$_SESSION["casual"] = array($row["casualWins"], $row["casualLosses"], $row["casualTies"]);
+					$_SESSION["easy"] = array($row["easyWins"], $row["easyLosses"], $row["easyTies"]);
+					$_SESSION["medium"] = array($row["mediumWins"], $row["mediumLosses"], $row["mediumTies"]);
+					$_SESSION["hard"] = array($row["hardWins"], $row["hardLosses"], $row["hardTies"]);
+					$_SESSION["impossible"] = array($row["impossibleWins"], $row["impossibleLosses"], $row["impossibleTies"]);
+					
+					//redirect
+					header("Location: index.php");
+				}
+			}
 		}
-		
-		//set session variables
-		session_start();
-		
-		//redirect
-		header("Location: index.php");
 	}
 	
 	$title = "Login";
@@ -32,7 +70,7 @@
 	require_once("layout/header.php");
 ?>
 <p style="margin: 20px auto 5px;"><?php echo $loginError;?></p>
-<form name="login" method="post" action="login.php">
+<form name="login" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
 	<table style="margin: 0 auto 20px;">
     	<tr>
         	<td>Username: </td>
