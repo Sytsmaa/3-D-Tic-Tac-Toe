@@ -84,15 +84,15 @@
 		{
 			//check for existing username or e-mail
 			require_once("database/data.php");
-			$queryResults = mysqli_query($userData, "SELECT username, email FROM users WHERE username='" . $username . "' OR email='" . $email . "'");
+			$queryResults = db2_exec($userData, "SELECT username, email FROM users WHERE username='" . $username . "' OR email='" . $email . "'");
 			
-			if(!($queryResults === false) && mysqli_num_rows($queryResults) > 0)
+			if(!($queryResults === false) && db2_num_rows($queryResults) > 0)
 			{
 				$valid = false;
 				$usernameTaken = false;
 				$emailTaken = false;
 				
-				while($row = mysqli_fetch_assoc($queryResults))
+				while($row = db2_fetch_assoc($queryResults))
 				{
 					if($row["username"] == $username)
 					{
@@ -126,7 +126,7 @@
 			//create account
 			//$sql = "INSERT INTO users (username, password, email) VALUES ('" . $username . "', '" . $hash . "', '" . $email . "')";
 			$sql = "INSERT INTO users (username, password, email, casualWins, casualLosses, casualTies, easyWins, easyLosses, easyTies, mediumWins, mediumLosses, mediumTies, hardWins, hardLosses, hardTies, impossibleWins, impossibleLosses, impossibleTies) VALUES ('" . $username . "', '" . $hash . "', '" . $email . "', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')";
-			mysqli_query($userData, $sql);
+			db2_exec($userData, $sql);
 		
 			//set session variables
 			session_start();

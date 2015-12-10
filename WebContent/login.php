@@ -24,7 +24,7 @@
 			//get user information
 			require_once("database/data.php");
 			$sql = "SELECT * FROM users WHERE username='" . $username . "' LIMIT 1";
-			$queryResult = mysqli_query($userData, $sql);
+			$queryResult = db2_exec($userData, $sql);
 			
 			if($queryResult === false)//mysqli_num_rows($queryResult) === 0)
 			{
@@ -33,7 +33,7 @@
 			}
 			else
 			{
-				$row = mysqli_fetch_assoc($queryResult);
+				$row = db2_fetch_assoc($queryResult);
 				$hashedPassword = $row["password"];
 				
 				if(!isPassword($password, $hashedPassword))
