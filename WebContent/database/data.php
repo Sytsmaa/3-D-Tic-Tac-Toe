@@ -35,6 +35,6 @@
 	if(!$userData)
 	{
 		//die("Connection failed: " . mysql_error());
-		die("Connection failed: " . db2_conn_error());
+		die("Connection failed: " . db2_conn_errormsg());
 	}
 ?>
