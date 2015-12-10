@@ -20,8 +20,17 @@ require_once($homeDir . "database/data.php");
 	<a href="<?php echo $homeDir;?>index.php"><h1>3D Tic-Tac-Toe</h1></a>
     <aside>
     	<nav>
-        	<a href="<?php echo $homeDir; ?>login.php">Log In</a> |
-            <a href="<?php echo $homeDir; ?>signup.php">Sign Up</a>
+        	<?php
+				if(!isset($_SESSION["username"]))
+				{
+        			echo "<a href='" . $homeDir . "login.php'>Log In</a> |
+            			<a href='" . $homeDir . "signup.php'>Sign Up</a>";
+				}
+				else
+				{
+					echo $_SESSION["username"] . " | <a href='" . $homeDir . "logout.php'> Log Out</a>";
+				}
+			?>
         </nav>
     </aside>
 </header>
