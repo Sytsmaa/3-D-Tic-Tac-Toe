@@ -90,6 +90,9 @@
 			if($row !== false)
 			//if(!($queryResults === false) && mysqli_num_rows($queryResults) > 0)
 			{
+				//debug
+				echo "has at least one row\n";
+				
 				$valid = false;
 				$usernameTaken = false;
 				$emailTaken = false;
@@ -97,6 +100,9 @@
 				do
 				//while($row = mysqli_fetch_assoc($queryResults))
 				{
+					//debugging
+					echo $row["username"] . " " . $row["password"] . "\n";
+					
 					if($row["username"] == $username)
 					{
 						$usernameTaken = true;
