@@ -6,6 +6,21 @@ import java.util.ArrayList;
 public class Board
 {
 	/**
+	 * Holds the value of the in progress state.
+	 */
+	private final int IN_PROGRESS = 0;
+	
+	/**
+	 * Holds the value of the game over state.
+	 */
+	private final int GAME_OVER = 1;
+	
+	/**
+	 * Holds the value of the tie state.
+	 */
+	private final int TIE = 2;
+	
+	/**
 	 * Holds the current player's turn.
 	 */
 	private int turn;
@@ -29,6 +44,11 @@ public class Board
 	 * Holds all the available moves left on the board still
 	 */
 	private ArrayList<Location> availableMoves;
+	
+	/**
+	 * Holds the current state of the game.
+	 */
+	private int state;
 	
 	/**
 	 * Board constructor initializes fields
@@ -56,6 +76,7 @@ public class Board
 		
 		this.player1 = player1;
 		this.player2 = player2;
+		this.state = this.IN_PROGRESS;
 	}	//end of Board constructor
 	
 	/**
@@ -114,6 +135,12 @@ public class Board
 	 */
 	public void makeMove(Location location)
 	{
+		//check if the game is over
+		if (this.state != this.IN_PROGRESS)	//the game is over
+		{
+			return;
+		}	//end if
+		
 		//check if the location is taken
 		if (isTaken(location))
 		{
@@ -138,36 +165,10 @@ public class Board
 		//remove the piece from the list
 		this.availableMoves.remove(location);
 		
-		//TODO:  Put piece on screen
-		
 		int state = isGameOver(piece.getClass());	//holds the state of the game
 		
 		//check if the game is over
-		if (state == 1)	//game is over
-		{
-			//update the players' statistics
-			//check which player's turn it is
-			if (this.turn == 1)	//player1's turn
-			{
-				//player1 wins
-				//player2 losses
-			}
-			else	//player2's turn
-			{
-				//player2 wins
-				//player1 losses
-			}	//end if
-			
-			//TODO:  Display winner
-		}
-		else if (state == 2)	//game is tied
-		{
-			//update the players' statistics
-			//it's a tie
-			
-			//TODO:  Display tie
-		}
-		else	//game is not over
+		if (state == this.IN_PROGRESS)	//game is not over
 		{
 			//swap the turns
 			if (this.turn == 1)	//it was player1's turn
@@ -178,14 +179,27 @@ public class Board
 			{
 				this.turn = 1;
 			}	//end if
-		}	//end if
+		}
 	}	//end of makeMove method
 	
 	/**
 	 * Returns a number representing the state of the game.
-	 * 0 = Not Game Over
-	 * 1 = Game Over
-	 * 2 = Tie
+	 * IN_PROGRESS = Not Game Over
+	 * GAME_OVER = Game Over
+	 * TIE = Tie
+	 * 
+	 * @return	Returns a number representing the state of the game.
+	 */
+	public int getState()
+	{
+		return this.state;
+	}	//end of getState method
+	
+	/**
+	 * Returns a number representing the state of the game.
+	 * IN_PROGRESS = Not Game Over
+	 * GAME_OVER = Game Over
+	 * TIE = Tie
 	 * 
 	 * @return	Returns a number representing the state of the game.
 	 */
@@ -194,40 +208,40 @@ public class Board
 		//check the 2D rows
 		if (check2DRows(piece))	//a win was found
 		{
-			return 1;
+			return this.GAME_OVER;
 		}	//end if
 		
 		//check the 2D columns
 		if (check2DColumns(piece))	//a win was found
 		{
-			return 1;
+			return this.GAME_OVER;
 		}	//end if
 		
 		//check the 2D diagonals
 		if (check2DDiagonals(piece))	//a win was found
 		{
-			return 1;
+			return this.GAME_OVER;
 		}	//end if
 		
 		//check the 3D rows
 		if (check3DRows(piece))	//a win was found
 		{
-			return 1;
+			return this.GAME_OVER;
 		}	//end if
 		
 		//check the 3D diagonals
 		if (check3DDiagonals(piece))	//a win was found
 		{
-			return 1;
+			return this.GAME_OVER;
 		}	//end if
 		
 		//check for a tie
 		if (isTie())	//a tie was found
 		{
-			return 2;
+			return this.TIE;
 		}	//end if
 	
-		return 0;
+		return this.IN_PROGRESS;
 	}	//end of isGameOver method
 	
 	/**
@@ -507,9 +521,9 @@ public class Board
 	
 	/**
 	 * Returns a number representing the state of the game.
-	 * 0 = Not Game Over
-	 * 1 = Game Over
-	 * 2 = Tie
+	 * IN_PROGRESS = Not Game Over
+	 * GAME_OVER = Game Over
+	 * TIE = Tie
 	 * 
 	 * @param testBoard	The Board to test.
 	 * @param turn		A number representing the player's turn.
