@@ -8,6 +8,8 @@ require_once($homeDir . "database/data.php");
 <meta charset="utf-8" />
 <link rel="stylesheet" href="<?php echo $homeDir; ?>layout/design.css" />
 
+<?php if(isset($game) && $game === true) echo "<script src='scripts/game-script.js'></script>"; ?>
+
 <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
