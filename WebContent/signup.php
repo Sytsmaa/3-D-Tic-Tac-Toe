@@ -39,7 +39,7 @@
 		}
 		
 		//check password for rules
-		if($valid)
+		/*if($valid)
 		{
 			$hasUpper = false;
 			$hasLower = false;
@@ -72,7 +72,7 @@
 				$valid = false;
 				$signupError = "Your password must contain at least one upper-case letter, one lower-case letter, one number, and one special character";
 			}
-		}
+		}*/
 		
 		//try to prevent injections
 		require_once("scripts/security.php");
@@ -99,7 +99,7 @@
 				{
 					//debugging
 					echo "<p>" . $row["username"] . " " . $row["password"] . "</p>";
-					echo "<p>do . . . while</p>";
+					echo "<p>while</p>";
 					
 					if($row["username"] == $username)
 					{
@@ -148,7 +148,7 @@
 			}
 			
 			//redirect
-			header("Location: index.php");
+			//header("Location: index.php");
 		}
 	}
 	

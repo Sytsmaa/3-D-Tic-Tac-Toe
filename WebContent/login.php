@@ -29,7 +29,7 @@
 			if($queryResult === false)//mysqli_num_rows($queryResult) === 0)
 			{
 				//debugging
-				echo "No rows\n";
+				echo "<p>No Rows</p>";
 				
 				$valid = false;
 				$loginError = "That username and password combination does not exist.";
@@ -37,7 +37,7 @@
 			else
 			{
 				//debugging
-				echo "Found user\n";
+				echo "<p>Found user</p>";
 				
 				$row = nextRow($queryResult);
 				$hashedPassword = $row["password"];
