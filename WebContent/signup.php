@@ -84,7 +84,7 @@
 		{
 			//check for existing username or e-mail
 			require_once("database/data.php");
-			$queryResults = query($userData, "SELECT username, email FROM users WHERE username='" . $username . "' OR email='" . $email . "'");
+			$queryResults = query($userData, "SELECT username, email FROM USERS WHERE username='" . $username . "' OR email='" . $email . "'");
 			
 			if(!($queryResults === false) && numRows($queryResults) > 0)
 			{
@@ -131,7 +131,7 @@
 			$hash = hashPassword($password);
 			
 			//create account
-			$sql = "INSERT INTO users (username, password, email) VALUES ('" . $username . "', '" . $hash . "', '" . $email . "')";
+			$sql = "INSERT INTO USERS (username, password, email) VALUES ('" . $username . "', '" . $hash . "', '" . $email . "')";
 			
 			query($userData, $sql);
 		
