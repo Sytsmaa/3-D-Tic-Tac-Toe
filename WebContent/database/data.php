@@ -24,9 +24,35 @@
 	$mysql_password = "CrCkhfK9hKDL";
 	$mysql_database = "SQL Database-eu";
 
-	$userData = mysql_connect($mysql_server_name, $mysql_username, $mysql_password, $mysql_database);*/
+	$userData = mysql_connect($mysql_server_name, $mysql_username, $mysql_password, $mysql_database);
 
 	$conn_string = "DRIVER={IBM DB2 ODBC DRIVER};DATABASE=SQL Database-eu;HOSTNAME=75.126.155.153;PORT=50000;PROTOCOL=TCPIP;UID=user11913;PWD=CrCkhfK9hKDL";
+	$userData = db2_connect($conn_string, '', '');*/
+
+	//referenced from https://hub.jazz.net/project/ibmdatabase/dashDB/overview?cm_mc_uid=55561737454714477902675&cm_mc_sid_50200000=1449758628#https://hub.jazz.net/git/ibmdatabase%252FdashDB/contents/master/samples/dashDBPHP/index.php
+	$services_json = json_decode($json,true);
+	$blu = $services_json["sqldb"];
+	if (empty($blu)) {
+	    echo "No dashDB service instance is bound. Please bind a dashDB service instance";
+	    return;
+	}
+
+	$bludb_config = $services_json["sqldb"][0]["credentials"];
+
+	// create DB connect string
+	$conn_string = "DRIVER={IBM DB2 ODBC DRIVER};DATABASE=".
+	   $bludb_config["db"].
+	   ";HOSTNAME=".
+	   $bludb_config["host"].
+	   ";PORT=".
+	   $bludb_config["port"].
+	   ";PROTOCOL=TCPIP;UID=".
+	   $bludb_config["username"].
+	   ";PWD=".
+	   $bludb_config["password"].
+	   ";";
+
+	// connect to BLUDB
 	$userData = db2_connect($conn_string, '', '');
 
 	//$userData = mysqli_connect("75.126.155.153", "USER11358", "5S835bQMEcE1");//, "sql database-t8");
