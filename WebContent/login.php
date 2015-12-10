@@ -42,6 +42,9 @@
 				$row = nextRow($queryResult);
 				$hashedPassword = $row["password"];
 				
+				//debugging
+				echo "<p>" . $row["username"] . " " . $row["password"] . "</p>";
+				
 				if(!isPassword($password, $hashedPassword))
 				{
 					$valid = false;
