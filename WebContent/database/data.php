@@ -3,7 +3,7 @@
 	$services_json = json_decode($json,true);
 	$blu = $services_json["sqldb"];
 	if (empty($blu)) {
-	    echo "No dashDB service instance is bound. Please bind a dashDB service instance";
+	    echo "No sqldb service instance is bound. Please bind a sqldb service instance";
 	    return;
 	}
 

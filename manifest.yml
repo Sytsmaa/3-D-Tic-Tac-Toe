@@ -6,4 +6,4 @@ applications:
   name: 3-D Tic-Tac-Toe
   host: 3-d-tic-tac-toe
   disk_quota: 1024M
-  buildpack: https://github.com/zendtech/zend-server-php-buildpack-bluemix.git
+  buildpack: https://github.com/ibmdb/db2heroku-buildpack-php.git
