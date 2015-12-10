@@ -28,5 +28,6 @@
 </body>
 </html>
 <?php
-	close();
+	//close();
+	db2_close();
 ?>
