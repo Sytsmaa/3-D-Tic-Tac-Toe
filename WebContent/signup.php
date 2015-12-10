@@ -124,7 +124,8 @@
 			$hash = hashPassword($password);
 			
 			//create account
-			$sql = "INSERT INTO users (username, password, email) VALUES ('" . $username . "', '" . $hash . "', '" . $email . "')";
+			//$sql = "INSERT INTO users (username, password, email) VALUES ('" . $username . "', '" . $hash . "', '" . $email . "')";
+			$sql = "INSERT INTO users (username, password, email, casualWins, casualLosses, casualTies, easyWins, easyLosses, easyTies, mediumWins, mediumLosses, mediumTies, hardWins, hardLosses, hardTies, impossibleWins, impossibleLosses, impossibleTies) VALUES ('" . $username . "', '" . $hash . "', '" . $email . "', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')";
 			mysqli_query($userData, $sql);
 		
 			//set session variables
