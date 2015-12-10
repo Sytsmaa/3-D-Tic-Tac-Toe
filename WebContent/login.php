@@ -26,7 +26,7 @@
 			$sql = "SELECT * FROM users WHERE username='" . $username . "' LIMIT 1";
 			$queryResult = query($userData, $sql);
 			
-			if($queryResult === false)//mysqli_num_rows($queryResult) === 0)
+			if($queryResult === false || numRows($queryResult) == 0)//mysqli_num_rows($queryResult) === 0)
 			{
 				//debugging
 				echo "<p>No Rows</p>";
