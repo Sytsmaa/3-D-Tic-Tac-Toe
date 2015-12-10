@@ -1,5 +1,14 @@
 <?php
 	//referenced from https://hub.jazz.net/project/ibmdatabase/dashDB/overview?cm_mc_uid=55561737454714477902675&cm_mc_sid_50200000=1449758628#https://hub.jazz.net/git/ibmdatabase%252FdashDB/contents/master/samples/dashDBPHP/index.php
+	//parse vcap
+	if( getenv("VCAP_SERVICES") ) {
+	    $json = getenv("VCAP_SERVICES");
+	} 
+	// No DB credentials
+	else {
+	    echo "No vcap services available.";
+	    return;
+	}
 	$services_json = json_decode($json,true);
 	$blu = $services_json["sqldb"];
 	if (empty($blu)) {
