@@ -20,9 +20,9 @@
 	echo "password=" . $mysql_password . "\n";*/
 
 	$mysql_server_name = "75.126.155.153:50000";
-	$mysql_username = "user11358";
-	$mysql_password = "5S835bQMEcE1";
-	$mysql_database = "SQL Database-t8";
+	$mysql_username = "user11913";
+	$mysql_password = "CrCkhfK9hKDL";
+	$mysql_database = "SQL Database-eu";
 
 	$userData = mysql_connect($mysql_server_name, $mysql_username, $mysql_password, $mysql_database);
 	//$userData = mysqli_connect("75.126.155.153", "USER11358", "5S835bQMEcE1");//, "sql database-t8");
