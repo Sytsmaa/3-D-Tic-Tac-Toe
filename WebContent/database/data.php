@@ -1,5 +1,11 @@
 <?php
 	//Referenced from https://hub.jazz.net/project/communitysample/php-mysql/overview#https://hub.jazz.net/git/communitysample%252Fphp-mysql/contents/master/index.php
+	echo '<h2>VCAP_SERVICE Environment variable</h2>';
+	echo "----------------------------------" . "</br>";
+	$key = "VCAP_SERVICES";
+	$value = getenv ( $key );
+	echo $key . ":" . $value . "</br>";
+	echo "----------------------------------" . "</br>";
 	$vcap_services = json_decode($_ENV["VCAP_SERVICES"]);
 	$db = $vcap_services->{'mysql-5.5'}[0]->credentials;
 	$mysql_database = $db->name;
@@ -13,6 +19,6 @@
 	
 	if(!$userData)
 	{
-		die("Connection failed: " . mysqli_connect_error());
+		die("Connection failed: " . mysql_error());
 	}
 ?>
