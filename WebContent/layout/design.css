@@ -2,28 +2,11 @@
 
 body
 {
-	background: #222;
+	background: #000;
 	font-family: "Courier New", Courier, monospace;
 	padding: 0;
 	margin: 0;
 	border: 0;
-}
-
-/**** Wrappers ****/
-
-#content-wrapper
-{
-	margin: 20px auto 15px;
-	padding: 0;
-	width: 1000px;
-}
-
-#inner-wrapper
-{
-	padding: 0;
-	width: inherit;
-	overflow: auto;
-	background: #999;
 }
 
 /**** Header ****/
@@ -33,7 +16,7 @@ header
 	width: inherit;
 	margin: 0;
 	text-align: center;
-	background: #333;
+	background: #00d800;
 	overflow: visible;
 }
 
@@ -45,7 +28,7 @@ header a h1
 header a
 {
 	min-height: 79px;
-	background: #333;
+	background: #00d800;
 	text-decoration: none;
 	color: #000;
 	overflow: auto;
@@ -53,12 +36,12 @@ header a
 
 header a:hover
 {
-	background: #ddd;
+	background: #00ee00;
 }
 
 header a:active
 {
-	background: #ddd;
+	background: #00ee00;
 }
 
 header aside
@@ -76,71 +59,28 @@ header aside nav a
 }
 header aside nav a:link
 {
-	color: #00f;
+	color: #000;
 }
 header aside nav a:visited
 {
-	color: #00f;
+	color: #000;
 }
 header aside nav a:hover
 {
-	color: #fff;
+	color: #000;
 }
 header aside nav a:active
 {
-	color: #00f;
+	color: #000;
 }
 
-#header
-{
-	width: inherit;
-	height: 35px;
-	background: #fff;
-	text-align: center;
-	border-radius: 8px 8px 0 0;
-}
-
-
-/****** Left Side ******/
-/* Used for navigation */
-#left
-{
-	width: 120px;
-	height: inherit;
-	float: left;
-	padding: 0;
-	background: #999;
-}
-
-#left .nav
-{
-	width: 118px;
-	border: 1px solid #000;
-}
-
-.nav a
-{
-	width: 106px;
-	padding: 5px;
-	display: block;
-	border: 1px solid #000;
-}
-
-/**** Right Side ****/
-/* Used for Content */
-#right
-{
-	width: 880px;
-	height: inherit;
-	float: right;
-	padding: 0;
-}
+/**** Content ****/
 
 #content
 {
 	width: 1000px;
 	margin: 20px auto 15px;
-	background: #999;
+	background: #00d800;
 	overflow: auto;
 }
 
@@ -164,17 +104,20 @@ header aside nav a:active
 	border: 1px solid #000;
 }
 
+
+/**** Game ****/
 #game
 {
-	width: 600px;
-	height: 600px;
-	margin: 20px 120px 20px 0;
+	width: 700px;
+	height: 700px;
+	margin: 20px 70px 20px 0;
 	float: right;
 	background: #000;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	color: #00d800;
+	text-align: center;
 }
 
 #game h1
@@ -198,4 +141,33 @@ header aside nav a:active
 	font-size: 36px;
 	display: block;
 	margin: 20px auto;
+}
+
+#game #buttonGrid
+{
+	max-width: 96px;
+	max-height: 100px;
+	border: 2px solid #00d800;
+	margin: 10px auto;
+	padding: 0;
+	font-size: 0;
+}
+
+#game #buttonGrid button
+{
+	width: 24px; /* Add 4 to what you want */
+	height: 24px; /* Add 4 to what you want */
+	display: inline;
+	background: none;
+	border: 2px solid #00d800;
+	margin: 0;
+	padding: 0;
+	font-size: 0px;
+}
+
+#game #buttonGrid p
+{
+	margin: 0;
+	padding: 0;
+	border: 0;
 }
