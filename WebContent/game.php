@@ -41,7 +41,15 @@
 		$_SESSION["difficulty"] = strtolower($title);
 		$_SESSION["isGameOver"] = false;
 		$_SESSION["results"] = "";
-		//$_SESSION["board"] = new Java("Board");
+		
+		if($_SESSION["playerTurn"] == 1)
+		{
+			$_SESSION["board"] = new Java("Board", new Java("Human", $_SESSION["username"]), new Java("AI", $difficulty));
+		}
+		else
+		{
+			$_SESSION["board"] = new Java("Board", new Java("AI", $difficulty), new Java("Human", $_SESSION["username"]));
+		}
 	}
 	
 	//cheating by changing difficulty
@@ -52,14 +60,15 @@
 		$_SESSION["results"] = "You Lose (Cheating)";
 	}
 	
-	//cheating by changing pos
-	if(isset($_POST["x"]))
+	//operate on xyz
+	if(isset($_POST["x"]) && isset($_POST["y"]) && isset($_POST["z"]))
 	{
 		//get x, y, and z
 		$x = $_POST["x"];
 		$y = $_POST["y"];
 		$z = $_POST["z"];
 		
+		//cheating on position
 		//if x, y, or z are out of bounds
 		if($x > 3 || $x < 0 || $y > 3 || $y < 0 || $z > 3 || $z < 0)
 		{
@@ -69,6 +78,45 @@
 				incrementLosses();
 				$_SESSION["isGameOver"] = true;
 				$_SESSION["results"] = "You Lose (Cheating)";
+			}
+		}
+		else
+		{
+			//make move
+			$_SESSION["board"]->makeMove(new Java("Location", $x, $y, $z));
+			
+			//get game state
+			$state = $_SESSION["board"]->getState();
+			
+			//in progress
+			if($state == 0);
+			//game over
+			if($state == 1)
+			{
+				if(!$_SESSION["isGameOver"])
+				{
+					$_SESSION["isGameOver"] = true;
+					$turn = $_SESSION["board"]->getTurn();
+					$_SESSION["results"] = "You " . $_SESSION["playerResults"][$turn - 1];
+					if($_SESSION["playerTurn"] == $turn)
+					{
+						incrementWins();
+					}
+					else
+					{
+						incrementLosses();
+					}
+				}
+			}
+			//tie
+			if($state == 2);
+			{
+				if(!$_SESSION["isGameOver"])
+				{
+					incrementTies();
+					$_SESSION["isGameOver"] = true;
+					$_SESSION["results"] = "Tie";
+				}
 			}
 		}
 	}
@@ -102,7 +150,7 @@
 								echo " onclick='makeMove(\"" . htmlspecialchars($_SERVER["PHP_SELF"]) . "?difficulty=" . $_SESSION["difficulty"] . "\", " . $x . ", " . $y . ", " . $z . ")'";
 							}
 							
-							echo ">&nbsp;</button>\n";
+							echo ">x</button>\n";
 						}
 						echo "</p>";
 					}
