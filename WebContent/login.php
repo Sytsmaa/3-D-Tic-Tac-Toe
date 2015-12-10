@@ -24,17 +24,29 @@
 			//get user information
 			require_once("database/data.php");
 			$sql = "SELECT * FROM users WHERE username='" . $username . "' LIMIT 1";
+			//$queryResult = query($userData, $sql);
 			$queryResult = db2_exec($userData, $sql);
 			
-			if($queryResult === false)//mysqli_num_rows($queryResult) === 0)
+			//if($queryResult === false || numRows($queryResult) == 0)//mysqli_num_rows($queryResult) === 0)
+			if($queryResult === false || db2_num_rows($queryResult) == 0)
 			{
+				//debugging
+				echo "<p>No Rows</p>";
+				
 				$valid = false;
 				$loginError = "That username and password combination does not exist.";
 			}
 			else
 			{
+				//debugging
+				echo "<p>Found user</p>";
+				
+				//$row = nextRow($queryResult);
 				$row = db2_fetch_assoc($queryResult);
 				$hashedPassword = $row["password"];
+				
+				//debugging
+				echo "<p>" . $row["username"] . " " . $row["password"] . "</p>";
 				
 				if(!isPassword($password, $hashedPassword))
 				{

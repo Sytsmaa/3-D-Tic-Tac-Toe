@@ -44,11 +44,25 @@
 		
 		if($_SESSION["playerTurn"] == 1)
 		{
-			$_SESSION["board"] = new Java("Board", new Java("Human", $_SESSION["username"]), new Java("AI", $difficulty));
+			if(isset($_SESSION["username"]))
+			{
+				$_SESSION["board"] = new Java("Board", new Java("Human", $_SESSION["username"]), new Java("AI", $difficulty));
+			}
+			else
+			{
+				$_SESSION["board"] = new Java("Board", new Java("Human", ""), new Java("AI", $difficulty));
+			}
 		}
 		else
 		{
-			$_SESSION["board"] = new Java("Board", new Java("AI", $difficulty), new Java("Human", $_SESSION["username"]));
+			if(isset($_SESSION["username"]))
+			{
+				$_SESSION["board"] = new Java("Board", new Java("AI", $difficulty), new Java("Human", $_SESSION["username"]));
+			}
+			else
+			{
+				$_SESSION["board"] = new Java("Board", new Java("AI", $difficulty), new Java("Human", ""));
+			}
 		}
 	}
 	

@@ -28,5 +28,5 @@
 </body>
 </html>
 <?php
-	db2_close($userData);
+	close();
 ?>

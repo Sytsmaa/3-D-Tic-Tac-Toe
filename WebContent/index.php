@@ -9,12 +9,6 @@
 	unset($_SESSION["results"]);
 	unset($_SESSION["board"]);
 	
-	//there must always be a username
-	if(!isset($_SESSION["username"]))
-	{
-		$_SESSION["username"] = "";
-	}
-	
 	//set player turn
 	if(!isset($_SESSION["playerTurn"]))
 	{

@@ -39,7 +39,7 @@
 		}
 		
 		//check password for rules
-		if($valid)
+		/*if($valid)
 		{
 			$hasUpper = false;
 			$hasLower = false;
@@ -72,7 +72,7 @@
 				$valid = false;
 				$signupError = "Your password must contain at least one upper-case letter, one lower-case letter, one number, and one special character";
 			}
-		}
+		}*/
 		
 		//try to prevent injections
 		require_once("scripts/security.php");
@@ -84,16 +84,27 @@
 		{
 			//check for existing username or e-mail
 			require_once("database/data.php");
-			$queryResults = db2_exec($userData, "SELECT username, email FROM users WHERE username='" . $username . "' OR email='" . $email . "'");
+			$sql = "SELECT username, email FROM users WHERE username='" . $username . "' OR email='" . $email . "'";
+			//$queryResults = query($userData, $sql);
+			$queryResults = db2_exec($userdata, $sql);
 			
+			//if(!($queryResults === false) && numRows($queryResults) > 0)
 			if(!($queryResults === false) && db2_num_rows($queryResults) > 0)
 			{
+				//debug
+				echo "<p>has at least one row</p>";
+				
 				$valid = false;
 				$usernameTaken = false;
 				$emailTaken = false;
 				
+				//while($row = nextRow($queryResults))
 				while($row = db2_fetch_assoc($queryResults))
 				{
+					//debugging
+					echo "<p>" . $row["username"] . " " . $row["password"] . "</p>";
+					echo "<p>while</p>";
+					
 					if($row["username"] == $username)
 					{
 						$usernameTaken = true;
@@ -124,9 +135,10 @@
 			$hash = hashPassword($password);
 			
 			//create account
-			//$sql = "INSERT INTO users (username, password, email) VALUES ('" . $username . "', '" . $hash . "', '" . $email . "')";
-			$sql = "INSERT INTO users (username, password, email, casualWins, casualLosses, casualTies, easyWins, easyLosses, easyTies, mediumWins, mediumLosses, mediumTies, hardWins, hardLosses, hardTies, impossibleWins, impossibleLosses, impossibleTies) VALUES ('" . $username . "', '" . $hash . "', '" . $email . "', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')";
-			db2_exec($userData, $sql);
+			$sql = "INSERT INTO users (username, password, email) VALUES ('" . $username . "', '" . $hash . "', '" . $email . "')";
+			
+			//query($userData, $sql);
+			db2_exec($userdata, $sql);
 		
 			//set session variables
 			session_start();
@@ -141,11 +153,11 @@
 			}
 			
 			//redirect
-			header("Location: index.php");
+			//header("Location: index.php");
 		}
 	}
 	
-	$title = "Login";
+	$title = "Signup";
 	$homeDir = "";
 	require_once("layout/header.php");
 ?>
