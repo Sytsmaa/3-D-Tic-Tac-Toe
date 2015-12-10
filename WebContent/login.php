@@ -70,6 +70,9 @@
 					$_SESSION["hard"] = array($row["hardWins"], $row["hardLosses"], $row["hardTies"]);
 					$_SESSION["impossible"] = array($row["impossibleWins"], $row["impossibleLosses"], $row["impossibleTies"]);
 					
+					//close database
+					db2_close($userData);
+					
 					//redirect
 					header("Location: index.php");
 				}

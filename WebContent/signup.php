@@ -153,6 +153,9 @@
 				$_SESSION["impossible"] = array(0, 0, 0);
 			}
 			
+			//close the databas
+			db2_close($userData);
+			
 			//redirect
 			header("Location: index.php");
 		}
