@@ -23,7 +23,7 @@
 			
 			//get user information
 			require_once("database/data.php");
-			$sql = "SELECT * FROM USERS WHERE username='" . $username . "' LIMIT 1";
+			$sql = "SELECT * FROM users";// WHERE username='" . $username . "' LIMIT 1";
 			$queryResult = query($userData, $sql);
 			
 			if($queryResult === false || numRows($queryResult) == 0)//mysqli_num_rows($queryResult) === 0)
