@@ -26,9 +26,7 @@
 			$sql = "SELECT * FROM users WHERE username='" . $username . "' LIMIT 1";
 			$queryResult = query($userData, $sql);
 			
-			$row = nextRow($queryResult);
-			if($row !== false)
-			//if($queryResult === false)//mysqli_num_rows($queryResult) === 0)
+			if($queryResult === false)//mysqli_num_rows($queryResult) === 0)
 			{
 				//debugging
 				echo "No rows\n";
@@ -41,7 +39,7 @@
 				//debugging
 				echo "Found user\n";
 				
-				//$row = mysqli_fetch_assoc($queryResult);
+				$row = nextRow($queryResult);
 				$hashedPassword = $row["password"];
 				
 				if(!isPassword($password, $hashedPassword))

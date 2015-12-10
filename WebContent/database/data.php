@@ -44,8 +44,14 @@
 	function query($sqlQuery)
 	{
 		$prepared = db2_prepare($userdata,$sqlQuery);
-		db2_execute($prepared);
-		return $prepared;
+		if(db2_execute($prepared))
+		{
+			return $prepared;
+		}
+		else
+		{
+			return false;
+		}
 		//return mysqli_query($userData, $sqlQuery);
 	}
 	

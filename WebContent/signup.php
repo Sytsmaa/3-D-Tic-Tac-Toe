@@ -86,23 +86,20 @@
 			require_once("database/data.php");
 			$queryResults = query($userData, "SELECT username, email FROM users WHERE username='" . $username . "' OR email='" . $email . "'");
 			
-			$row = nextRow($queryResults);
-			if($row !== false)
-			//if(!($queryResults === false) && mysqli_num_rows($queryResults) > 0)
+			if(!($queryResults === false) && numRows($queryResults) > 0)
 			{
 				//debug
-				echo "has at least one row\n";
+				echo "<p>has at least one row</p>";
 				
 				$valid = false;
 				$usernameTaken = false;
 				$emailTaken = false;
 				
-				do
-				//while($row = mysqli_fetch_assoc($queryResults))
+				while($row = nextRow($queryResults))
 				{
 					//debugging
-					echo $row["username"] . " " . $row["password"] . "\n";
-					echo "do . . . while\n";
+					echo "<p>" . $row["username"] . " " . $row["password"] . "</p>";
+					echo "<p>do . . . while</p>";
 					
 					if($row["username"] == $username)
 					{
@@ -113,7 +110,7 @@
 					{
 						$emailTaken = true;
 					}
-				} while($row = nextRow($queryResults));
+				}
 				
 				if($usernameTaken)
 				{
