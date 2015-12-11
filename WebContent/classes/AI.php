@@ -61,17 +61,21 @@ class AI implements Player
 		//This is to make sure a valid level is passed
 		switch($level)
 		{
-			case $AI_LEVEL_CASUAL:
-				$this->level = $AI_LEVEL_CASUAL;
-			case $AI_LEVEL_EASY:
-				$this->level = $AI_LEVEL_EASY;
-			case $AI_LEVEL_MEDIUM:
-				$this->level = $AI_LEVEL_MEDIUM;
-			case $AI_LEVEL_HARD:
-				$this->level = $AI_LEVEL_HARD;
-			case $AI_LEVEL_IMPOSSIBLE:
+			case $this->AI_LEVEL_CASUAL:
+				$this->level = $this->AI_LEVEL_CASUAL;
+				break;
+			case $this->AI_LEVEL_EASY:
+				$this->level = $this->AI_LEVEL_EASY;
+				break;
+			case $this->AI_LEVEL_MEDIUM:
+				$this->level = $this->AI_LEVEL_MEDIUM;
+				break;
+			case $this->AI_LEVEL_HARD:
+				$this->level = $this->AI_LEVEL_HARD;
+				break;
+			case $this->AI_LEVEL_IMPOSSIBLE:
 			default:
-				$this->level = $AI_LEVEL_IMPOSSIBLE;
+				$this->level = $this->AI_LEVEL_IMPOSSIBLE;
 		}
 	}
 	
@@ -84,15 +88,19 @@ class AI implements Player
 		$aiTitle = "AI - ";
 		switch($level)
 		{
-			case $AI_LEVEL_CASUAL:
+			case $this->AI_LEVEL_CASUAL:
 				return $aiTitle . "Casual";
-			case $AI_LEVEL_EASY:
+				
+			case $this->AI_LEVEL_EASY:
 				return $aiTitle . "Easy";
-			case $AI_LEVEL_MEDIUM:
+				
+			case $this->AI_LEVEL_MEDIUM:
 				return $aiTitle . "Medium";
-			case $AI_LEVEL_HARD:
+				
+			case $this->AI_LEVEL_HARD:
 				return $aiTitle . "Hard";
-			case $AI_LEVEL_IMPOSSIBLE:
+				
+			case $this->AI_LEVEL_IMPOSSIBLE:
 				return $aiTitle . "Impossible";
 		}
 		//This should be impossible
@@ -111,39 +119,39 @@ class AI implements Player
 			//Get a random move
 			$l = $this->randomMove($b); //Just pick a random location. Who cares?
 		}
-		else if ($level == $AI_LEVEL_EASY)
+		else if ($this->level == $this->AI_LEVEL_EASY)
 		{
 			//We look for a winning move, else play randomly
-			$l = winningMove($b);
+			$l = $this->winningMove($b);
 			if ($l == NULL)
 			{
-				$l = randomMove($b);
+				$l = $this->randomMove($b);
 			}
 		}
-		else if ($level == $AI_LEVEL_MEDIUM)
+		else if ($this->level == $this->AI_LEVEL_MEDIUM)
 		{
 			//We look for a winning move, else we block if we have a certain threshold, else we play randomly
-			$l = winningMove($b);
-			if ($l == NULL && Math.random() <= .5)
+			$l = $this->winningMove($b);
+			if ($l == NULL && rand(0, 1))
 			{
-				$l = blockOpponent($b);
+				$l = $this->blockOpponent($b);
 			}
 			else
 			{
-				$l = randomMove($b);
+				$l = $this->randomMove($b);
 			}
 		}
-		else if ($level == $AI_LEVEL_HARD)
+		else if ($this->level == $this->AI_LEVEL_HARD)
 		{
 			//We look for a winning move, else we try to block, else we play randomly
-			$l = winningMove($b);
+			$l = $this->winningMove($b);
 			if ($l == NULL)
 			{
-				$l = blockOpponent($b);
+				$l = $this->blockOpponent($b);
 			}
 			if ($l == NULL)
 			{
-				$l = randomMove($b);
+				$l = $this->randomMove($b);
 			}
 		}
 		else
@@ -151,7 +159,7 @@ class AI implements Player
 			//This would be the impossible AI, which needs to have a lot of thinking done
 			//For now, have it play randomly like the AI_LEVEL_CASUAL so things don't break
 			//This is just to make it simple so we can have testing done
-			$l = getOptimalMove($b);
+			$l = $this->getOptimalMove($b);
 			
 		}
 		return $l;
@@ -292,7 +300,7 @@ class AI implements Player
 					{
 						//This is a valid move
 						$board[$x][$y][$z] = $piece;
-						$weight = getWeightOfMove($board, $b, $b->getTurn() % 2);
+						$weight = $this->getWeightOfMove($board, $b, $b->getTurn() % 2);
 						if ($weight > $bestWeight)
 						{
 							$bestWeight = $weight;
@@ -341,7 +349,7 @@ class AI implements Player
 						{
 							//This is a valid move
 							$board[$x][$y][$z] = $piece;
-							$weight += getWeightOfMove($board, $b, ($turn + 1) % 2);
+							$weight += $this->getWeightOfMove($board, $b, ($turn + 1) % 2);
 							$board[$x][$y][$z] = 0;
 						}
 					}
