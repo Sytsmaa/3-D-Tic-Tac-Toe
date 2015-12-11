@@ -96,7 +96,6 @@
 		
 		public function makeMove($coordinate)
 		{
-			echo "<p>remaining moves: " . count($this->availableMoves) . "</p>";
 			$xLoc = $coordinate[0];
 			$yLoc = $coordinate[1];
 			$zLoc = $coordinate[2];
@@ -129,29 +128,6 @@
 					break;
 				}
 			}
-			
-			/*
-			for ($x = 0; $x < 4; $x++)
-			{
-				for ($y = 0; $y < 4; $y++)
-				{
-					for ($z = 0; $z < 4; $z++)
-					{
-						if ($this->availableMoves[$x][$y][$z][0] === $xLoc)
-						{
-							if ($this->availableMoves[$x][$y][$z][1] === $yLoc)
-							{
-								if ($this->availableMoves[$x][$y][$z][2] === $zLoc)
-								{
-									unset($this->availableMoves[$x][$y][$z]);
-									break 3;
-								}	//end if
-							}	//end if
-						}	//end if
-					}	//end for
-				}	//end for
-			}	//end for
-			*/
 			
 			$result = $this->isGameOver($piece);
 			
@@ -422,7 +398,7 @@
 			return $this->board;
 		}	//end of getBoard method
 		
-		public function testBoard(Board $testBoard, $t)
+		public function testBoard($testBoard, $t)
 		{
 			$oldBoard = $this->board;
 			$this->board = $testBoard;

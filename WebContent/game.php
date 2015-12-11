@@ -126,9 +126,9 @@
 	if(isset($_POST["x"]) && isset($_POST["y"]) && isset($_POST["z"]))
 	{
 		//get x, y, and z
-		$x = $_POST["x"];
-		$y = $_POST["y"];
-		$z = $_POST["z"];
+		$x = (int)$_POST["x"];
+		$y = (int)$_POST["y"];
+		$z = (int)$_POST["z"];
 		
 		//cheating on position
 		//if x, y, or z are out of bounds or game over
@@ -159,9 +159,6 @@
 				//don't double increment wins or losses
 				if(!$_SESSION["isGameOver"])
 				{
-					//debugging
-					?><p>Game Over</p><?php
-					
 					$_SESSION["isGameOver"] = true;
 					$turn = $_SESSION["board"]->getTurn();
 					$_SESSION["results"] = "You " . $_SESSION["playerResults"][$turn - 1];
@@ -189,7 +186,7 @@
 			
 			//computer move until a valid move is selected
 			$isValidMove = false;
-			while(!$isValidMove)
+			while(!$isValidMove && !$_SESSION["isGameOver"])
 			{
 				//get move (AI)
 				$move = $_SESSION["AI"]->getNextMove($_SESSION["board"]);
@@ -217,9 +214,6 @@
 				//don't double increment wins or losses
 				if(!$_SESSION["isGameOver"])
 				{
-					//debugging
-					?><p>Game Over</p><?php
-					
 					$_SESSION["isGameOver"] = true;
 					$turn = $_SESSION["board"]->getTurn();
 					$_SESSION["results"] = "You " . $_SESSION["playerResults"][$turn - 1];

@@ -243,6 +243,8 @@ class AI implements Player
 						$board[$x][$y][$z] = $opponent;
 						if ($b->testBoard($board, $b->getTurn()) == 1)
 						{
+							if($x == 0 && $y == 0 && $z == 0)
+								?><p>Block (0, 0, 0)</p><?php
 							//That move can end the game, so we need to block it
 							$board[$x][$y][$z] = 0; //Set it back just in case
 							return array($x, $y, $z);
