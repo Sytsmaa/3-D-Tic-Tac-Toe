@@ -1,4 +1,6 @@
 <?php
+	require_once($homeDir . "classes/Location.php");
+	
 	class Board
 	{
 		private $IN_PROGRESS = 0;
