@@ -23,7 +23,8 @@
 			
 			//get user information
 			require_once("database/data.php");
-			$sql = "SELECT * FROM users WHERE username='" . $username . "' LIMIT 1";
+			//$sql = "SELECT * FROM users WHERE username='" . $username . "' LIMIT 1";
+			$sql = "SELECT * FROM users WHERE username='" . $username . "'";
 			//$queryResult = query($userData, $sql);
 			$queryResult = db2_exec($userData, $sql);
 			
