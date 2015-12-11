@@ -140,7 +140,7 @@
 				}	//end for
 			}	//end for
 			
-			$result = isGameOver($piece);
+			$result = $this->isGameOver($piece);
 			
 			if ($result === $this->IN_PROGRESS)
 			{
@@ -162,32 +162,32 @@
 		
 		private function isGameOver($piece)
 		{
-			if (check2DRows($piece))
+			if ($this->check2DRows($piece))
 			{
 				return $this->GAME_OVER;
 			}	//end if
 			
-			if (check2DColumns($piece))
+			if ($this->check2DColumns($piece))
 			{
 				return $this->GAME_OVER;
 			}	//end if
 			
-			if (check2DDiagonals($piece))
+			if ($this->check2DDiagonals($piece))
 			{
 				return $this->GAME_OVER;
 			}	//end if
 			
-			if (check3DRows($piece))
+			if ($this->check3DRows($piece))
 			{
 				return $this->GAME_OVER;
 			}	//end if
 			
-			if (check3DDiagonals($piece))
+			if ($this->check3DDiagonals($piece))
 			{
 				return $this->GAME_OVER;
 			}	//end if
 			
-			if (isTie())
+			if ($this->isTie())
 			{
 				return $this->TIE;
 			}	//end if
@@ -405,14 +405,14 @@
 			
 			if ($t == 1)
 			{
-				$result = isGameOver($this->X_PIECE);
+				$result = $this->isGameOver($this->X_PIECE);
 			}
 			else
 			{
-				$result = isGameOver($this->O_PIECE);
+				$result = $this->isGameOver($this->O_PIECE);
 			}	//end if
 			
-			$this->board = $oldBoard;	//reset the board
+			$this->board = $oldBoard;
 			
 			return $result;
 		}	//end of testBoard method
