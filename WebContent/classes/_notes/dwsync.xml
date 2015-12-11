@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="AI.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942817668302495" remote="130942817660000000" Dst="1" />
-<file name="Board.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942837981169231" remote="130942837980000000" Dst="1" />
-<file name="Human.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942799897037305" remote="130942799890000000" Dst="1" />
+<file name="AI.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942842538767308" remote="130942842530000000" Dst="1" />
+<file name="Board.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942852534027010" remote="130942852530000000" Dst="1" />
+<file name="Human.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942842274254115" remote="130942842270000000" Dst="1" />
 <file name="InvalidLocationException.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942736465741171" remote="130942736460000000" Dst="1" />
-<file name="Location.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942826910405599" remote="130942826910000000" Dst="1" />
-<file name="O.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942799800203563" remote="130942799800000000" Dst="1" />
+<file name="Location.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942842187158703" remote="130942842180000000" Dst="1" />
+<file name="O.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942841293892906" remote="130942841290000000" Dst="1" />
 <file name="Piece.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942744944467171" remote="130942744940000000" Dst="1" />
 <file name="Player.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942737970198286" remote="130942737970000000" Dst="1" />
-<file name="X.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942799784955816" remote="130942799780000000" Dst="1" />
+<file name="X.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942841351014150" remote="130942841350000000" Dst="1" />
 </dwsync>

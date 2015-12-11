@@ -17,7 +17,7 @@
 		private $state;
 		
 		
-		public function __construct($p1, $p2)
+		public function __construct(Player $p1, Player $p2)
 		{
 			$this->turn = 1;
 			$this->board = array
@@ -69,8 +69,9 @@
 			$this->state = $this->IN_PROGRESS;
 		}	//end of Board constructor
 		
-		private function isTaken(Location $location)
+		private function isTaken($serialLocation)
 		{
+			$location = unserialize($serialLocation);
 			if($location === NULL)
 			{
 				?><p>$location in isTaken() is NULL</p><?php
@@ -79,7 +80,11 @@
 			echo "<p>" . $location->getY() . "</p>\n";
 			echo "<p>" . $location->getZ() . "</p>\n";
 			
-			if ($this->board[$location->getX()][$location->getY()][$location->getZ()] === $this->EMPTY_SPACE)
+			$x = $location->getX();
+			$y = $location->getY();
+			$z = $location->getZ();
+			
+			if ($this->board[$x][$y][$z] === $this->EMPTY_SPACE)
 			{
 				return false;
 			}	//end if
@@ -102,14 +107,15 @@
 			return $this->turn;
 		}	//end of getTurn method
 		
-		public function makeMove(Location $location)
+		public function makeMove($serialLocation)
 		{
+			$location = unserialize($serialLocation);
 			if ($this->state != $this->IN_PROGRESS)
 			{
 				return;
 			}	//end if
 			
-			if ($this->isTaken($location))
+			if ($this->isTaken($serialLocation))
 			{
 				return;
 			}	//end if
@@ -401,7 +407,7 @@
 			return $this->board;
 		}	//end of getBoard method
 		
-		public function testBoard($testBoard, $t)
+		public function testBoard(Board $testBoard, $t)
 		{
 			$oldBoard = $this->board;
 			$this->board = $testBoard;

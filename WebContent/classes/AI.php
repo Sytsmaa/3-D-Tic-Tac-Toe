@@ -112,7 +112,7 @@ class AI implements Player
 	 * @param b The board the AI is playing on
 	 * @return The location the AI will play next
 	 */
-	public function getNextMove($b) {
+	public function getNextMove(Board $b) {
 		$l;
 		if ($this->level == $this->AI_LEVEL_CASUAL)
 		{
@@ -170,7 +170,8 @@ class AI implements Player
 	 * @param b The board the AI is playing on
 	 * @return The move the AI will take to win the game, or NULL if the AI can't win yet.
 	 */
-	private function winningMove($b) {
+	private function winningMove(Board $b)
+	{
 		$piece;
 		//If the current turn is one, it is Xs turn. That means the AI is X
 		if ($b->getTurn() == 1)
@@ -215,7 +216,7 @@ class AI implements Player
 	 * @param b The board the AI is playing on
 	 * @return The move the AI will take to block the opponent, or NULL if there is nothing to block yet
 	 */
-	private function blockOpponent($b)
+	private function blockOpponent(Board $b)
 	{
 		$opponent;
 		//If the current turn is 1, it is Xs turn. That means the opponent is O. The converse is true
@@ -260,7 +261,7 @@ class AI implements Player
 	 * @param b The board the AI is playing on
 	 * @return A random location on the board that is still free.
 	 */
-	private function randomMove($b)
+	private function randomMove(Board $b)
 	{
 		//This is kind of bad due to making a new random object every time, but it should be okay due to a small size
 		$list = $b->getAvailableMoves();
@@ -273,7 +274,7 @@ class AI implements Player
 	 * @param b The board the AI is playing on
 	 * @return The optimal location the AI can play.
 	 */
-	private function getOptimalMove($b)
+	private function getOptimalMove(Board $b)
 	{
 		$piece;
 		//If the current turn is one, it is Xs turn. That means the AI is X
@@ -321,7 +322,7 @@ class AI implements Player
 	 * @param turn The turn of the board (because the board object won't be accurate)
 	 * @return -1 if the opponent wins, 0 if a tie, 1 if the AI wins
 	 */
-	private function getWeightOfMove($board, $b, $turn)
+	private function getWeightOfMove(array $board, Board $b, $turn)
 	{
 		//Note, b.getTurn() will tell us which player the AI is
 		//Example, b.getTurn() is 1. AI is player 1. if turn is 0, AI won.

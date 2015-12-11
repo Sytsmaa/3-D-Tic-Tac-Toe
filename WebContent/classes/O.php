@@ -21,7 +21,7 @@ class O implements Piece
 	 * 
 	 * @param location	The location of the O.
 	 */
-	public function __construct($location)
+	public function __construct(Location $location)
 	{
 		$this->picture = NULL;	//TODO:  Remove this
 		//TODO:  this.picture = picture of an O;

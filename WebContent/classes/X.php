@@ -21,7 +21,7 @@ class X implements Piece
 	 * 
 	 * @param location	The location of the X.
 	 */
-	public function __construct($location)
+	public function __construct(Location $location)
 	{
 		$this->picture = NULL;	//TODO:  Remove this
 		//TODO:  this.picture = picture of an X;

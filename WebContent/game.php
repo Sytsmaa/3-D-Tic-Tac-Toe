@@ -101,25 +101,37 @@
 				$_SESSION["board"] = new Board($_SESSION["AI"], new Human("")); //Java("Board", $_SESSION["AI"], new Java("Human", ""));
 			}
 			
-			//debug move
-			?><p>making default move</p><?php
-			$loc = new Location(0, 0, 0);
-			$_SESSION["board"]->makeMove($loc);
-			$_SESSION["gameBoard"][0][0][0] = 1;
-			?><p>after default move</p><?php
-			
 			//make move (AI)
 			$move = $_SESSION["AI"]->getNextMove($_SESSION["board"]);
+			
+			//debug AI move
 			if($move === NULL)
 			{
 				?><p>move is null 108</p><?php
 			}
+			
 			$x = $move->getX();
 			$y = $move->getY();
 			$z = $move->getZ();
 			$_SESSION["gameBoard"][$x][$y][$z] = $_SESSION["board"]->getTurn();
 			$_SESSION["board"]->makeMove($move);
 		}
+			
+			//debug move
+			?><p>making default move</p><?php
+			$loc = new Location(0, 0, 0);
+			$serialLoc = serialize($loc);
+			if(!isset($loc))
+			{
+				?><p>WTF Location?</p><?php
+			}
+			if(!isset($_SESSION["board"]))
+			{
+				?><p>WTF Board?</p><?php
+			}
+			$_SESSION["board"]->makeMove($serialLoc);
+			$_SESSION["gameBoard"][0][0][0] = 1;
+			?><p>after default move</p><?php
 	}
 	
 	//cheating by changing difficulty
@@ -192,10 +204,13 @@
 			
 			//make move (AI)
 			$move = $_SESSION["AI"]->getNextMove($_SESSION["board"]);
+			
+			//debug AI move
 			if($move === NULL)
 			{
 				?><p>move is null 190</p><?php
 			}
+			
 			$x = $move->getX();
 			$y = $move->getY();
 			$z = $move->getZ();
