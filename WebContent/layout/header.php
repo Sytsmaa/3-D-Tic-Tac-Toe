@@ -7,6 +7,7 @@ require_once($homeDir . "database/data.php");
 <head>
 <meta charset="utf-8" />
 <link rel="stylesheet" href="<?php echo $homeDir; ?>layout/design.css" />
+<link rel="icon" type="image/png" href="/favicon.png" />
 
 <?php if(isset($game) && $game === true) echo "<script src='scripts/game-script.js'></script>"; ?>
 
