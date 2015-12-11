@@ -1,4 +1,6 @@
 <?php
+	$homeDir = "";
+	
 	require_once($homeDir . "classes/Location.php");
 	
 	class Board
