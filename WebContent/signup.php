@@ -86,7 +86,7 @@
 			require_once("database/data.php");
 			$sql = "SELECT username, email FROM users WHERE username='" . $username . "' OR email='" . $email . "'";
 			//$queryResults = query($userData, $sql);
-			$queryResults = db2_exec($userdata, $sql);
+			$queryResults = db2_exec($userdDta, $sql);
 			
 			//if(!($queryResults === false) && numRows($queryResults) > 0)
 			if(!($queryResults === false) && db2_num_rows($queryResults) > 0)
@@ -139,7 +139,7 @@
 			$sql = "INSERT INTO users (username, password, email, casualWins, casualLosses, casualTies, easyWins, easyLosses, easyTies, mediumWins, mediumLosses, mediumTies, hardWins, hardLosses, hardTies, impossibleWins, impossibleLosses, impossibleTies) VALUES ('" . $username . "', '" . $hash . "', '" . $email . "', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0')";
 			
 			//query($userData, $sql);
-			db2_exec($userdata, $sql);
+			db2_exec($userData, $sql);
 		
 			//set session variables
 			session_start();

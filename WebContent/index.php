@@ -18,14 +18,7 @@
 	else
 	{
 		//swap turn
-		if($_SESSION["playerTurn"] == 1)
-		{
-			$_SESSION["playerTurn"] == 2;
-		}
-		else
-		{
-			$_SESSION["playerTurn"] == 1;
-		}
+		$_SESSION["playerTurn"] = ($_SESSION["playerTurn"] % 2) + 1;
 		
 		//swap results
 		$swap = $_SESSION["playerResults"][0];

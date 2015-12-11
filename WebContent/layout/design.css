@@ -162,7 +162,8 @@ header aside nav a:active
 	border: 2px solid #00d800;
 	margin: 0;
 	padding: 0;
-	font-size: 0px;
+	color: #00d800;
+	font-size: 16px;
 }
 
 #game #buttonGrid p

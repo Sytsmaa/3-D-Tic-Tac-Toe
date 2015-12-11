@@ -28,7 +28,7 @@ function post(path, params, method) {
     form.submit();
 }
 
-function makeMove(path, posX, poxY, posZ)
+function makeMove(path, posX, posY, posZ)
 {
 	post(path, {x: posX, y: posY, z: posZ});
 }

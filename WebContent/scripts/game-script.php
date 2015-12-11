@@ -13,7 +13,8 @@
 				return;
 			
 			$sql = "UPDATE users SET casualWins=" . $value . " WHERE username='" . $_SESSION["username"] . "'";
-			query($userData, $sql);
+			//query($userData, $sql);
+			db2_exec($userData, $sql);
 		}
 		if($difficulty == "easy")
 		{
@@ -25,8 +26,8 @@
 				return;
 			
 			$sql = "UPDATE users SET easyWins=" . $value . " WHERE username='" . $_SESSION["username"] . "'";
-			query($userData, $sql);
-		}
+			//query($userData, $sql);
+			db2_exec($userData, $sql);		}
 		if($difficulty == "medium")
 		{
 			$value = $_SESSION["medium"][0];
@@ -37,7 +38,8 @@
 				return;
 			
 			$sql = "UPDATE users SET mediumWins=" . $value . " WHERE username='" . $_SESSION["username"] . "'";
-			query($userData, $sql);
+			//query($userData, $sql);
+			db2_exec($userData, $sql);
 		}
 		if($difficulty == "hard")
 		{
@@ -49,7 +51,8 @@
 				return;
 			
 			$sql = "UPDATE users SET hardWins=" . $value . " WHERE username='" . $_SESSION["username"] . "'";
-			query($userData, $sql);
+			//query($userData, $sql);
+			db2_exec($userData, $sql);
 		}
 		if($difficulty == "impossible")
 		{
@@ -61,7 +64,8 @@
 				return;
 			
 			$sql = "UPDATE users SET impossibleWins=" . $value . " WHERE username='" . $_SESSION["username"] . "'";
-			query($userData, $sql);
+			//query($userData, $sql);
+			db2_exec($userData, $sql);
 		}
 	}
 	
@@ -79,7 +83,8 @@
 				return;
 			
 			$sql = "UPDATE users SET casualLosses=" . $value . " WHERE username='" . $_SESSION["username"] . "'";
-			query($userData, $sql);
+			//query($userData, $sql);
+			db2_exec($userData, $sql);
 		}
 		if($difficulty == "easy")
 		{
@@ -91,7 +96,8 @@
 				return;
 			
 			$sql = "UPDATE users SET easyLosses=" . $value . " WHERE username='" . $_SESSION["username"] . "'";
-			query($userData, $sql);
+			//query($userData, $sql);
+			db2_exec($userData, $sql);
 		}
 		if($difficulty == "medium")
 		{
@@ -103,7 +109,8 @@
 				return;
 			
 			$sql = "UPDATE users SET mediumLosses=" . $value . " WHERE username='" . $_SESSION["username"] . "'";
-			query($userData, $sql);
+			//query($userData, $sql);
+			db2_exec($userData, $sql);
 		}
 		if($difficulty == "hard")
 		{
@@ -115,7 +122,8 @@
 				return;
 			
 			$sql = "UPDATE users SET hardLosses=" . $value . " WHERE username='" . $_SESSION["username"] . "'";
-			query($userData, $sql);
+			//query($userData, $sql);
+			db2_exec($userData, $sql);
 		}
 		if($difficulty == "impossible")
 		{
@@ -127,7 +135,8 @@
 				return;
 			
 			$sql = "UPDATE users SET impossibleLosses=" . $value . " WHERE username='" . $_SESSION["username"] . "'";
-			query($userData, $sql);
+			//query($userData, $sql);
+			db2_exec($userData, $sql);
 		}
 	}
 	
@@ -145,7 +154,8 @@
 				return;
 			
 			$sql = "UPDATE users SET casualTies=" . $value . " WHERE username='" . $_SESSION["username"] . "'";
-			query($userData, $sql);
+			//query($userData, $sql);
+			db2_exec($userData, $sql);
 		}
 		if($difficulty == "easy")
 		{
@@ -157,7 +167,8 @@
 				return;
 			
 			$sql = "UPDATE users SET easyTies=" . $value . " WHERE username='" . $_SESSION["username"] . "'";
-			query($userData, $sql);
+			//query($userData, $sql);
+			db2_exec($userData, $sql);
 		}
 		if($difficulty == "medium")
 		{
@@ -169,7 +180,8 @@
 				return;
 			
 			$sql = "UPDATE users SET mediumTies=" . $value . " WHERE username='" . $_SESSION["username"] . "'";
-			query($userData, $sql);
+			//query($userData, $sql);
+			db2_exec($userData, $sql);
 		}
 		if($difficulty == "hard")
 		{
@@ -181,7 +193,8 @@
 				return;
 			
 			$sql = "UPDATE users SET hardTies=" . $value . " WHERE username='" . $_SESSION["username"] . "'";
-			query($userData, $sql);
+			//query($userData, $sql);
+			db2_exec($userData, $sql);
 		}
 		if($difficulty == "impossible")
 		{
@@ -193,7 +206,8 @@
 				return;
 			
 			$sql = "UPDATE users SET impossibleTies=" . $value . " WHERE username='" . $_SESSION["username"] . "'";
-			query($userData, $sql);
+			//query($userData, $sql);
+			db2_exec($userData, $sql);
 		}
 	}
 ?>
