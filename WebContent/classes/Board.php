@@ -61,7 +61,7 @@
 				{
 					for ($z = 0; $z < 4; $z++)
 					{
-						$this->availableMoves[] = new Location($x, $y, $z);
+						$this->availableMoves[] = array($x, $y, $z);
 					}	//end for
 				}	//end for
 			}	//end for
@@ -69,22 +69,9 @@
 			$this->state = $this->IN_PROGRESS;
 		}	//end of Board constructor
 		
-		private function isTaken($serialLocation)
-		{
-			$location = unserialize($serialLocation);
-			if($location === NULL)
-			{
-				?><p>$location in isTaken() is NULL</p><?php
-			}
-			echo "<p>" . $location->getX() . "</p>\n";
-			echo "<p>" . $location->getY() . "</p>\n";
-			echo "<p>" . $location->getZ() . "</p>\n";
-			
-			$x = $location->getX();
-			$y = $location->getY();
-			$z = $location->getZ();
-			
-			if ($this->board[$x][$y][$z] === $this->EMPTY_SPACE)
+		private function isTaken($xLoc, $yLoc, $zLoc)
+		{			
+			if ($this->board[$xLoc][$yLoc][$zLoc] === $this->EMPTY_SPACE)
 			{
 				return false;
 			}	//end if
@@ -107,15 +94,14 @@
 			return $this->turn;
 		}	//end of getTurn method
 		
-		public function makeMove($serialLocation)
+		public function makeMove($xLoc, $yLoc, $zLoc)
 		{
-			$location = unserialize($serialLocation);
 			if ($this->state != $this->IN_PROGRESS)
 			{
 				return;
 			}	//end if
 			
-			if ($this->isTaken($serialLocation))
+			if ($this->isTaken($xLoc, $yLoc, $zLoc))
 			{
 				return;
 			}	//end if
@@ -127,7 +113,7 @@
 				$piece = $this->X_PIECE;
 			}	//end if
 			
-			$this->board[$location->getX()][$location->getY()][$location->getZ()] = $piece;
+			$this->board[$xLoc][$yLoc][$zLoc] = $piece;
 			
 			for ($x = 0; $x < 4; $x++)
 			{
@@ -135,11 +121,11 @@
 				{
 					for ($z = 0; $z < 4; $z++)
 					{
-						if ($this->availableMoves[$x][$y][$z]->getX() === $location->getX())
+						if ($this->availableMoves[$x][$y][$z][0] === $xLoc)
 						{
-							if ($this->availableMoves[$x][$y][$z]->getY() === $location->getY())
+							if ($this->availableMoves[$x][$y][$z][1] === $yLoc)
 							{
-								if ($this->availableMoves[$x][$y][$z]->getZ() === $location->getZ())
+								if ($this->availableMoves[$x][$y][$z][2] === $zLoc)
 								{
 									unset($this->availableMoves[$x][$y][$z]);
 									break 3;
