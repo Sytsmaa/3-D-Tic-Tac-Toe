@@ -9,7 +9,7 @@ class Human implements Player
 	/**
 	 * Holds the player's username.
 	 */
-	private $username;
+	private final $username;
 	
 	/**
 	 * Human constructor initializes fields.

@@ -9,12 +9,12 @@ class O implements Piece
 	/**
 	 * Holds the picture of the O.
 	 */
-	private $picture;
+	private final $picture;
 	
 	/**
 	 * Holds the location of the O.
 	 */
-	private $location;
+	private final $location;
 	
 	/**
 	 * X constructor initializes fields.

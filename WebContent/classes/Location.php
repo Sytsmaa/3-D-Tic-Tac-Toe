@@ -7,17 +7,17 @@ class Location
 	/**
 	 * Holds the x coordinate of the location.
 	 */
-	private $x;
+	private final $x;
 	
 	/**
 	 * Holds the y coordinate of the location.
 	 */
-	private $y;
+	private final $y;
 	
 	/**
 	 * Holds the z coordinate of the location.
 	 */
-	private $z;
+	private final $z;
 	
 	/**
 	 * Location constructor initializes fields.
