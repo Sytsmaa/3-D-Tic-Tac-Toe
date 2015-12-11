@@ -46,10 +46,10 @@
 				
 				//$row = nextRow($queryResult);
 				//$row = db2_fetch_assoc($queryResult);
-				$hashedPassword = $row["password"];
+				$hashedPassword = $row['password'];
 				
 				//debugging
-				echo "<p>" . $row["username"] . " " . $row["password"] . "</p>";
+				echo "<p>" . $row['username'] . " " . $row['password'] . "</p>";
 				
 				if(!isPassword($password, $hashedPassword))
 				{
