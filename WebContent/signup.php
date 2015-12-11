@@ -39,7 +39,7 @@
 		}
 		
 		//check password for rules
-		/*if($valid)
+		if($valid)
 		{
 			$hasUpper = false;
 			$hasLower = false;
@@ -72,7 +72,7 @@
 				$valid = false;
 				$signupError = "Your password must contain at least one upper-case letter, one lower-case letter, one number, and one special character";
 			}
-		}*/
+		}
 		
 		//try to prevent injections
 		require_once("scripts/security.php");
@@ -153,7 +153,7 @@
 				$_SESSION["impossible"] = array(0, 0, 0);
 			}
 			
-			//close the databas
+			//close the database
 			db2_close($userData);
 			
 			//redirect
@@ -189,7 +189,7 @@
         </tr>
         <tr>
         	<td>&nbsp;</td>
-          	<td align="right"><input type="submit" /></td>
+          	<td align="right"><input type="submit" value="Sign Up" /></td>
             <td>&nbsp;</td>
         </tr>
     </table>

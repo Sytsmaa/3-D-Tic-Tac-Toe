@@ -27,8 +27,11 @@
 			//$queryResult = query($userData, $sql);
 			$queryResult = db2_exec($userData, $sql);
 			
-			//if($queryResult === false || numRows($queryResult) == 0)//mysqli_num_rows($queryResult) === 0)
-			if($queryResult === false || db2_num_rows($queryResult) == 0)
+			//debug
+			echo "<p>" . db2_num_rows($queryResult) . "</p>";
+			
+			//if($queryResult === false || numRows($queryResult) == 0)//mysqli_num_rows($queryResult) === 0)\
+			if($queryResult === false || db2_num_rows($queryResult) === 0)
 			{
 				//debugging
 				echo "<p>No Rows</p>";
@@ -97,7 +100,7 @@
         </tr>
         <tr>
         	<td>&nbsp;</td>
-          	<td align="right"><input type="submit" /></td>
+          	<td align="right"><input type="submit" value="Log In" /></td>
         </tr>
     </table>
 </form>
