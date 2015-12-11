@@ -94,8 +94,12 @@
 			return $this->turn;
 		}	//end of getTurn method
 		
-		public function makeMove($xLoc, $yLoc, $zLoc)
+		public function makeMove($coordinate)
 		{
+			echo "<p>remaining moves: " . count($this->availableMoves) . "</p>";
+			$xLoc = $coordinate[0];
+			$yLoc = $coordinate[1];
+			$zLoc = $coordinate[2];
 			if ($this->state != $this->IN_PROGRESS)
 			{
 				return;
@@ -115,6 +119,18 @@
 			
 			$this->board[$xLoc][$yLoc][$zLoc] = $piece;
 			
+			for($x = 0; $x < count($this->availableMoves); $x++)
+			{
+				$c = $this->availableMoves[$x];
+				if($c[0] === $xLoc && $c[1] === $yLoc && $c[2] === $zLoc)
+				{
+					unset($this->availableMoves[$x]);
+					$this->availableMoves = array_values($this->availableMoves);
+					break;
+				}
+			}
+			
+			/*
 			for ($x = 0; $x < 4; $x++)
 			{
 				for ($y = 0; $y < 4; $y++)
@@ -135,6 +151,7 @@
 					}	//end for
 				}	//end for
 			}	//end for
+			*/
 			
 			$result = $this->isGameOver($piece);
 			
@@ -193,6 +210,7 @@
 		
 		private function isTie()
 		{
+			
 			for ($x = 0; $x < 4; $x++)
 			{
 				for ($y = 0; $y < 4; $y++)
@@ -206,8 +224,14 @@
 					}	//end for
 				}	//end for
 			}	//end for
-		
-			return true;
+			
+			
+			/*if(count($this->availableMoves) === 0)
+			{
+				return true;
+			}*/
+			
+			return false;
 		}	//end of isTie method
 		
 		private function check2DRows($piece)

@@ -36,7 +36,6 @@
 	require_once($homeDir . "classes/Board.php");
 	require_once($homeDir . "classes/AI.php");
 	require_once($homeDir . "classes/Human.php");
-	require_once($homeDir . "classes/Location.php");
 	require_once($homeDir . "layout/header.php");
 	
 	//set values for starting
@@ -110,28 +109,19 @@
 				?><p>move is null 108</p><?php
 			}
 			
-			$x = $move->getX();
-			$y = $move->getY();
-			$z = $move->getZ();
+			$x = $move[0];
+			$y = $move[1];
+			$z = $move[2];
 			$_SESSION["gameBoard"][$x][$y][$z] = $_SESSION["board"]->getTurn();
 			$_SESSION["board"]->makeMove($move);
 		}
 			
 			//debug move
-			?><p>making default move</p><?php
-			$loc = new Location(0, 0, 0);
-			$serialLoc = serialize($loc);
-			if(!isset($loc))
-			{
-				?><p>WTF Location?</p><?php
-			}
-			if(!isset($_SESSION["board"]))
-			{
-				?><p>WTF Board?</p><?php
-			}
-			$_SESSION["board"]->makeMove($serialLoc);
+			/*?><p>making default move</p><?php
+			$loc = array(0, 0, 0);
+			$_SESSION["board"]->makeMove($loc);
 			$_SESSION["gameBoard"][0][0][0] = 1;
-			?><p>after default move</p><?php
+			?><p>after default move</p><?php*/
 	}
 	
 	//cheating by changing difficulty
@@ -166,18 +156,21 @@
 		{
 			//make move
 			$_SESSION["gameBoard"][$x][$y][$z] = $_SESSION["board"]->getTurn();
-			$_SESSION["board"]->makeMove(new Location($x, $y, $z));//new Java("Location", $x, $y, $z));
+			$_SESSION["board"]->makeMove(array($x, $y, $z));//new Java("Location", $x, $y, $z));
 			
 			//get game state
 			$state = $_SESSION["board"]->getState();
 			
 			//in progress
-			if($state == 0);
+			if($state === 0);
 			//game over
-			if($state == 1)
+			if($state === 1)
 			{
 				if(!$_SESSION["isGameOver"])
 				{
+					//debugging
+					?><p>Game Over</p><?php
+					
 					$_SESSION["isGameOver"] = true;
 					$turn = $_SESSION["board"]->getTurn();
 					$_SESSION["results"] = "You " . $_SESSION["playerResults"][$turn - 1];
@@ -192,7 +185,7 @@
 				}
 			}
 			//tie
-			if($state == 2);
+			if($state === 2)
 			{
 				if(!$_SESSION["isGameOver"])
 				{
@@ -211,9 +204,9 @@
 				?><p>move is null 190</p><?php
 			}
 			
-			$x = $move->getX();
-			$y = $move->getY();
-			$z = $move->getZ();
+			$x = $move[0];
+			$y = $move[1];
+			$z = $move[2];
 			$_SESSION["gameBoard"][$x][$y][$z] = $_SESSION["board"]->getTurn();
 			$_SESSION["board"]->makeMove($move);
 			
@@ -221,12 +214,15 @@
 			$state = $_SESSION["board"]->getState();
 			
 			//in progress
-			if($state == 0);
+			if($state === 0);
 			//game over
-			if($state == 1)
+			if($state === 1)
 			{
 				if(!$_SESSION["isGameOver"])
 				{
+					//debugging
+					?><p>Game Over</p><?php
+					
 					$_SESSION["isGameOver"] = true;
 					$turn = $_SESSION["board"]->getTurn();
 					$_SESSION["results"] = "You " . $_SESSION["playerResults"][$turn - 1];
@@ -241,7 +237,7 @@
 				}
 			}
 			//tie
-			if($state == 2);
+			if($state === 2)
 			{
 				if(!$_SESSION["isGameOver"])
 				{

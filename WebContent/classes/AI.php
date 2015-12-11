@@ -176,11 +176,11 @@ class AI implements Player
 		//If the current turn is one, it is Xs turn. That means the AI is X
 		if ($b->getTurn() == 1)
 		{
-			$piece = new X(new Location(0,0,0));
+			$piece = 1;
 		}
 		else
 		{
-			$piece = new O(new Location(0,0,0));
+			$piece = 2;
 		}
 		$board = $b->getBoard();
 		
@@ -199,7 +199,7 @@ class AI implements Player
 						{
 							//This is a winning move and the AI should take it
 							$board[$x][$y][$z] = 0; //Set it back in case
-							return new Location($x, $y, $z);
+							return array($x, $y, $z);
 						}
 						$board[$x][$y][$z] = 0; //Set it back just int case
 					}
@@ -222,11 +222,11 @@ class AI implements Player
 		//If the current turn is 1, it is Xs turn. That means the opponent is O. The converse is true
 		if ($b->getTurn() == 1)
 		{
-			$opponent = new O(new Location(0,0,0));
+			$opponent = 2;
 		}
 		else
 		{
-			$opponent = new X(new Location(0,0,0));
+			$opponent = 1;
 		}
 		$board = $b->getBoard();
 		
@@ -245,7 +245,7 @@ class AI implements Player
 						{
 							//That move can end the game, so we need to block it
 							$board[$x][$y][$z] = 0; //Set it back just in case
-							return new Location($x, $y, $z);
+							return array($x, $y, $z);
 						}
 						$board[$x][$y][$z] = 0; //Set it back
 					}
@@ -280,11 +280,11 @@ class AI implements Player
 		//If the current turn is one, it is Xs turn. That means the AI is X
 		if ($b->getTurn() == 1)
 		{
-			$piece = new X(new Location(0,0,0));
+			$piece = 1;
 		}
 		else
 		{
-			$piece = new O(new Location(0,0,0));
+			$piece = 2;
 		}
 		$board = $b->getBoard();
 		
@@ -305,7 +305,7 @@ class AI implements Player
 						if ($weight > $bestWeight)
 						{
 							$bestWeight = $weight;
-							$bestLocation = new Location($x, $y, $z);
+							$bestLocation = array($x, $y, $z);
 						}
 						$board[$x][$y][$z] = 0;
 					}
@@ -334,11 +334,11 @@ class AI implements Player
 			$weight = 0;
 			if ($turn == 0)
 			{
-				$piece = new X(new Location(0,0,0));
+				$piece = 1;
 			}
 			else
 			{
-				$piece = new O(new Location(0,0,0));
+				$piece = 2;
 			}
 			for ($x = 0; $x < count($board); $x++)
 			{
