@@ -165,6 +165,10 @@
 				{
 					$this->turn = 1;
 				}	//end if
+			}
+			else
+			{
+				$this->state = $result;
 			}	//end if
 		}	//end of makeMove method
 		

@@ -78,6 +78,7 @@
 		
 		$_SESSION["AI"] = new AI($difficulty);//Java("AI", $difficulty);
 		
+		//set player first when their turn is first
 		if($_SESSION["playerTurn"] == 1)
 		{
 			if(isset($_SESSION["username"]))
@@ -100,28 +101,17 @@
 				$_SESSION["board"] = new Board($_SESSION["AI"], new Human("")); //Java("Board", $_SESSION["AI"], new Java("Human", ""));
 			}
 			
-			//make move (AI)
+			//AI moves first if player's turn is second
+			//get move (AI)
 			$move = $_SESSION["AI"]->getNextMove($_SESSION["board"]);
-			
-			//debug AI move
-			if($move === NULL)
-			{
-				?><p>move is null 108</p><?php
-			}
-			
 			$x = $move[0];
 			$y = $move[1];
 			$z = $move[2];
+			
+			//make move
 			$_SESSION["gameBoard"][$x][$y][$z] = $_SESSION["board"]->getTurn();
 			$_SESSION["board"]->makeMove($move);
 		}
-			
-			//debug move
-			/*?><p>making default move</p><?php
-			$loc = array(0, 0, 0);
-			$_SESSION["board"]->makeMove($loc);
-			$_SESSION["gameBoard"][0][0][0] = 1;
-			?><p>after default move</p><?php*/
 	}
 	
 	//cheating by changing difficulty
@@ -132,7 +122,7 @@
 		$_SESSION["results"] = "You Lose (Cheating)";
 	}
 	
-	//operate on xyz
+	//operate on xyz if set
 	if(isset($_POST["x"]) && isset($_POST["y"]) && isset($_POST["z"]))
 	{
 		//get x, y, and z
@@ -141,8 +131,8 @@
 		$z = $_POST["z"];
 		
 		//cheating on position
-		//if x, y, or z are out of bounds
-		if($x > 3 || $x < 0 || $y > 3 || $y < 0 || $z > 3 || $z < 0)
+		//if x, y, or z are out of bounds or game over
+		if($x > 3 || $x < 0 || $y > 3 || $y < 0 || $z > 3 || $z < 0 || $_SESSION["isGameOver"])
 		{
 			//no double incrents
 			if(!$_SESSION["isGameOver"])
@@ -166,6 +156,7 @@
 			//game over
 			if($state === 1)
 			{
+				//don't double increment wins or losses
 				if(!$_SESSION["isGameOver"])
 				{
 					//debugging
@@ -187,6 +178,7 @@
 			//tie
 			if($state === 2)
 			{
+				//don't double increment ties
 				if(!$_SESSION["isGameOver"])
 				{
 					incrementTies();
@@ -195,20 +187,24 @@
 				}
 			}
 			
-			//make move (AI)
-			$move = $_SESSION["AI"]->getNextMove($_SESSION["board"]);
-			
-			//debug AI move
-			if($move === NULL)
+			//computer move until a valid move is selected
+			$isValidMove = false;
+			while(!$isValidMove)
 			{
-				?><p>move is null 190</p><?php
+				//get move (AI)
+				$move = $_SESSION["AI"]->getNextMove($_SESSION["board"]);
+				$x = $move[0];
+				$y = $move[1];
+				$z = $move[2];
+				
+				//make move
+				if($_SESSION["gameBoard"][$x][$y][$z] === 0)
+				{
+					$_SESSION["gameBoard"][$x][$y][$z] = $_SESSION["board"]->getTurn();
+					$_SESSION["board"]->makeMove($move);
+					$isValidMove = true;
+				}
 			}
-			
-			$x = $move[0];
-			$y = $move[1];
-			$z = $move[2];
-			$_SESSION["gameBoard"][$x][$y][$z] = $_SESSION["board"]->getTurn();
-			$_SESSION["board"]->makeMove($move);
 			
 			//get game state
 			$state = $_SESSION["board"]->getState();
@@ -218,6 +214,7 @@
 			//game over
 			if($state === 1)
 			{
+				//don't double increment wins or losses
 				if(!$_SESSION["isGameOver"])
 				{
 					//debugging
@@ -239,6 +236,7 @@
 			//tie
 			if($state === 2)
 			{
+				//don't double increment ties
 				if(!$_SESSION["isGameOver"])
 				{
 					incrementTies();
