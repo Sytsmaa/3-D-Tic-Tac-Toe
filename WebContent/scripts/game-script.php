@@ -68,7 +68,7 @@
 			$result = db2_exec($userData, $sql);
 		}
 		
-		echo "difficulty=" . $difficulty . "<br />";
+		/*echo "difficulty=" . $difficulty . "<br />";
 		echo "username=" . $_SESSION["username"] . "<br />";
 		echo "value=" . $value . "<br />";
 		echo "sql=" . $sql . "<br />";
@@ -80,7 +80,7 @@
 		else
 		{
 			echo "result=false<br />";
-		}
+		}*/
 	}
 	
 	function incrementLosses()
