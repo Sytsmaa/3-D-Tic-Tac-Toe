@@ -67,11 +67,11 @@
 					$_SESSION["username"] = $username;
 					
 					//set statistics
-					$_SESSION["casual"] = array($row["casualWins"], $row["casualLosses"], $row["casualTies"]);
-					$_SESSION["easy"] = array($row["easyWins"], $row["easyLosses"], $row["easyTies"]);
-					$_SESSION["medium"] = array($row["mediumWins"], $row["mediumLosses"], $row["mediumTies"]);
-					$_SESSION["hard"] = array($row["hardWins"], $row["hardLosses"], $row["hardTies"]);
-					$_SESSION["impossible"] = array($row["impossibleWins"], $row["impossibleLosses"], $row["impossibleTies"]);
+					$_SESSION["casual"] = array($row["CASUALWINS"], $row["CASUALLOSSES"], $row["CASUALTIES"]);
+					$_SESSION["easy"] = array($row["EASYWINS"], $row["EASYLOSSES"], $row["EASYTIES"]);
+					$_SESSION["medium"] = array($row["MEDIUMWINS"], $row["MEDIUMLOSSES"], $row["MEDIUMTIES"]);
+					$_SESSION["hard"] = array($row["HARDWINS"], $row["HARDLOSSES"], $row["HARDTIES"]);
+					$_SESSION["impossible"] = array($row["IMPOSSIBLEWINS"], $row["IMPOSSIBLELOSSES"], $row["IMPOSSIBLETIES"]);
 					
 					//close database
 					db2_close($userData);
