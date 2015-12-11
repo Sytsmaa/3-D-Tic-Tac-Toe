@@ -36,7 +36,7 @@
 	require_once($homeDir . "classes/Board.php");
 	require_once($homeDir . "classes/AI.php");
 	require_once($homeDir . "classes/Human.php");
-	require_once($homeDir . "layout/header.php");
+	//require_once($homeDir . "layout/header.php");
 	
 	//set values for starting
 	if(!isset($_SESSION["difficulty"]))
@@ -241,6 +241,7 @@
 		}
 	}
 	
+	require_once($homeDir . "layout/header.php");
 	
 ?>
 	<?php require_once("layout/scores.php");?>
