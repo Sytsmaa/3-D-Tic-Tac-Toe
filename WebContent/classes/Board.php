@@ -230,8 +230,9 @@
 			{
 				return true;
 			}*/
+			//return false;
 			
-			return false;
+			return true;
 		}	//end of isTie method
 		
 		private function check2DRows($piece)
