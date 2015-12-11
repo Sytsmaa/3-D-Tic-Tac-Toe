@@ -108,6 +108,10 @@
 			$_SESSION["gameBoard"][$x][$y][$z] = $_SESSION["board"]->getTurn();
 			$_SESSION["board"]->makeMove($move);
 		}
+		
+		?>
+        <p>Created Board</p>
+        <?php
 	}
 	
 	//cheating by changing difficulty
