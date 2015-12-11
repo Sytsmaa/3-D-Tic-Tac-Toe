@@ -12,7 +12,7 @@
 			if(!isset($_SESSION["username"]))
 				return;
 			
-			$sql = "UPDATE users SET casualWins=" . $value . " WHERE username='" . $_SESSION["username"] . "'";
+			$sql = "UPDATE USERS SET CASUALWINS=" . $value . " WHERE USERNAME='" . $_SESSION["username"] . "'";
 			//query($userData, $sql);
 			$result = db2_exec($userData, $sql);
 		}
