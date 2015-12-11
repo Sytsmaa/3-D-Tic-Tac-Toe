@@ -45,7 +45,7 @@ class AI implements Player
 	
 	/**
 	 * The default constructor for an AI. Assumes medium difficulty
-	 */
+	 *
 	public function __constructor()
 	{
 		//We'll assume medium is the default, just in case.
@@ -56,8 +56,9 @@ class AI implements Player
 	 * Constructor for the AI
 	 * @param level The level the AI will be. These are statically defined in the AI class
 	 */
-	public function __constructor2($level)
+	public function AI($level)
 	{
+		
 		//This is to make sure a valid level is passed
 		switch($level)
 		{
@@ -86,7 +87,7 @@ class AI implements Player
 	public function getUsername()
 	{
 		$aiTitle = "AI - ";
-		switch($level)
+		switch($this->level)
 		{
 			case $this->AI_LEVEL_CASUAL:
 				return $aiTitle . "Casual";
@@ -241,10 +242,8 @@ class AI implements Player
 					{
 						//The space is free, test it
 						$board[$x][$y][$z] = $opponent;
-						if ($b->testBoard($board, $b->getTurn()) == 1)
+						if ($b->testBoard($board, $b->getTurn() % 2 + 1) == 1)
 						{
-							if($x == 0 && $y == 0 && $z == 0)
-								?><p>Block (0, 0, 0)</p><?php
 							//That move can end the game, so we need to block it
 							$board[$x][$y][$z] = 0; //Set it back just in case
 							return array($x, $y, $z);
