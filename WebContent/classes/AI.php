@@ -12,32 +12,32 @@ class AI implements Player
 	* The simplest AI level. This AI just plays randomly and won't even attempt to win.
 	* It's like playing a two year old.
 	*/
-	public static final $AI_LEVEL_CASUAL = 0;
+	public $AI_LEVEL_CASUAL = 0;
 	
 	/**
 	* The simple AI level. This AI just plays randomly, and will
 	* only attempt to win if it manages to have all but one piece
 	* in a line.
 	*/
-	public static final $AI_LEVEL_EASY = 1;
+	public $AI_LEVEL_EASY = 1;
 	
 	/**
 	* This AI level will most of the time block the player, but
 	* will sometimes suffer from tunnel vision and miss a block.
 	*/
-	public static final $AI_LEVEL_MEDIUM = 2;
+	public $AI_LEVEL_MEDIUM = 2;
 	
 	/**
 	* This AI level will always block the player if the player is about
 	* to win. Therefore, the player has to have multiple ways of winning
 	* to beat the AI.
 	*/
-	public static final $AI_LEVEL_HARD = 3;
+	public $AI_LEVEL_HARD = 3;
 	
 	/**
 	* The hardest AI level. This AI cannot be beaten, only tied with.
 	*/
-	public static final $AI_LEVEL_IMPOSSIBLE = 4;
+	public $AI_LEVEL_IMPOSSIBLE = 4;
 	
 	//Private fields about the AI
 	private $level;
@@ -106,10 +106,10 @@ class AI implements Player
 	 */
 	public function getNextMove($b) {
 		$l;
-		if ($level == $AI_LEVEL_CASUAL)
+		if ($this->level == $this->AI_LEVEL_CASUAL)
 		{
 			//Get a random move
-			$l = randomMove($b); //Just pick a random location. Who cares?
+			$l = $this->randomMove($b); //Just pick a random location. Who cares?
 		}
 		else if ($level == $AI_LEVEL_EASY)
 		{

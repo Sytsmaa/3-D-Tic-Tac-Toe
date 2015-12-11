@@ -32,12 +32,12 @@
 	}
 	
 	//required files
-	require_once($homeDir . "layout/header.php");
 	require_once($homeDir . "scripts/game-script.php");
 	require_once($homeDir . "classes/Board.php");
 	require_once($homeDir . "classes/AI.php");
 	require_once($homeDir . "classes/Human.php");
 	require_once($homeDir . "classes/Location.php");
+	require_once($homeDir . "layout/header.php");
 	
 	//set values for starting
 	if(!isset($_SESSION["difficulty"]))
@@ -77,9 +77,6 @@
 			)
 		);
 		
-		?>
-        <p>Starting Java</p>
-        <?php
 		$_SESSION["AI"] = new AI($difficulty);//Java("AI", $difficulty);
 		
 		if($_SESSION["playerTurn"] == 1)
@@ -105,17 +102,13 @@
 			}
 			
 			//make move (AI)
-			$move = $_SESSION["AI"]->getNextMove();
+			$move = $_SESSION["AI"]->getNextMove($_SESSION["board"]);
 			$x = $move->getX();
 			$y = $move->getY();
 			$z = $move->getZ();
 			$_SESSION["gameBoard"][$x][$y][$z] = $_SESSION["board"]->getTurn();
 			$_SESSION["board"]->makeMove($move);
 		}
-		
-		?>
-        <p>Created Board</p>
-        <?php
 	}
 	
 	//cheating by changing difficulty
@@ -187,7 +180,7 @@
 			}
 			
 			//make move (AI)
-			$move = $_SESSION["AI"]->getNextMove();
+			$move = $_SESSION["AI"]->getNextMove($_SESSION["board"]);
 			$x = $move->getX();
 			$y = $move->getY();
 			$z = $move->getZ();

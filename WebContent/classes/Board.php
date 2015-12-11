@@ -71,6 +71,10 @@
 		
 		private function isTaken($location)
 		{
+			echo "<p>" . $location->getX() . "</p>\n";
+			echo "<p>" . $location->getY() . "</p>\n";
+			echo "<p>" . $location->getZ() . "</p>\n";
+			
 			if ($this->board[$location->getX()][$location->getY()][$location->getZ()] === 0)
 			{
 				return false;
@@ -101,7 +105,7 @@
 				return;
 			}	//end if
 			
-			if (isTaken($location))
+			if ($this->isTaken($location))
 			{
 				return;
 			}	//end if
