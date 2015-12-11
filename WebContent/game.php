@@ -101,6 +101,13 @@
 				$_SESSION["board"] = new Board($_SESSION["AI"], new Human("")); //Java("Board", $_SESSION["AI"], new Java("Human", ""));
 			}
 			
+			//debug move
+			?><p>making default move</p><?php
+			$loc = new Location(0, 0, 0);
+			$_SESSION["board"]->makeMove($loc);
+			$_SESSION["gameBoard"][0][0][0] = 1;
+			?><p>after default move</p><?php
+			
 			//make move (AI)
 			$move = $_SESSION["AI"]->getNextMove($_SESSION["board"]);
 			if($move === NULL)

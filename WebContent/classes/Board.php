@@ -69,7 +69,7 @@
 			$this->state = $this->IN_PROGRESS;
 		}	//end of Board constructor
 		
-		private function isTaken($location)
+		private function isTaken(Location $location)
 		{
 			if($location === NULL)
 			{
@@ -102,7 +102,7 @@
 			return $this->turn;
 		}	//end of getTurn method
 		
-		public function makeMove($location)
+		public function makeMove(Location $location)
 		{
 			if ($this->state != $this->IN_PROGRESS)
 			{
