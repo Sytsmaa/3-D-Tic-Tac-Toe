@@ -27,11 +27,10 @@
 			//$queryResult = query($userData, $sql);
 			$queryResult = db2_exec($userData, $sql);
 			
-			//debug
-			echo "<p>" . db2_num_rows($queryResult) . "</p>";
+			$row = db2_fetch_assoc($queryResult);
 			
 			//if($queryResult === false || numRows($queryResult) == 0)//mysqli_num_rows($queryResult) === 0)\
-			if($queryResult === false || db2_num_rows($queryResult) === 0)
+			if($queryResult === false || $row === false)
 			{
 				//debugging
 				echo "<p>No Rows</p>";
@@ -45,7 +44,7 @@
 				echo "<p>Found user</p>";
 				
 				//$row = nextRow($queryResult);
-				$row = db2_fetch_assoc($queryResult);
+				//$row = db2_fetch_assoc($queryResult);
 				$hashedPassword = $row["password"];
 				
 				//debugging
