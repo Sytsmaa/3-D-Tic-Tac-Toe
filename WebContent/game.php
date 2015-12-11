@@ -37,6 +37,7 @@
 	require_once($homeDir . "classes/AI.php");
 	require_once($homeDir . "classes/Human.php");
 	//require_once($homeDir . "layout/header.php");
+	session_start();
 	
 	//set values for starting
 	if(!isset($_SESSION["difficulty"]))
