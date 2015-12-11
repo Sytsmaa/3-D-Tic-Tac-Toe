@@ -158,9 +158,23 @@ class AI implements Player
 		else
 		{
 			//This would be the impossible AI, which needs to have a lot of thinking done
-			//For now, have it play randomly like the AI_LEVEL_CASUAL so things don't break
-			//This is just to make it simple so we can have testing done
-			$l = $this->getOptimalMove($b);
+			//should always look for a winning move
+			$l = $this->winningMove($b);
+			//should always try to block next
+			if($l == NULL)
+			{
+				$l = $this->blockOpponent($b);
+			}
+			//look for possible winning moves
+			if($l == NULL)
+			{
+				$l = $this->getOptimalMove($b);
+			}
+			//there are no good moves
+			if($l == NULL)
+			{
+				$l = $this->randomMove($b);
+			}
 			
 		}
 		return $l;
@@ -291,7 +305,7 @@ class AI implements Player
 		
 		//This should never return NULL. Something is wrong if it does
 		$bestLocation = NULL;
-		$bestWeight = $PHP_INT_MIN;
+		$bestWeight = 0;
 		for ($x = 0; $x < count($board); $x++)
 		{
 			for ($y = 0; $y < count($board[$x]); $y++)
@@ -302,7 +316,7 @@ class AI implements Player
 					{
 						//This is a valid move
 						$board[$x][$y][$z] = $piece;
-						$weight = $this->getWeightOfMove($board, $b, $b->getTurn() % 2);
+						$weight = $this->getWeightOfMove($board, $b, $b->getTurn() % 2, 3);
 						if ($weight > $bestWeight)
 						{
 							$bestWeight = $weight;
@@ -323,8 +337,13 @@ class AI implements Player
 	 * @param turn The turn of the board (because the board object won't be accurate)
 	 * @return -1 if the opponent wins, 0 if a tie, 1 if the AI wins
 	 */
-	private function getWeightOfMove(array $board, Board $b, $turn)
+	private function getWeightOfMove(array $board, Board $b, $turn, $remaining)
 	{
+		if($remaining == 0)
+		{
+			return 0;
+		}
+		
 		//Note, b.getTurn() will tell us which player the AI is
 		//Example, b.getTurn() is 1. AI is player 1. if turn is 0, AI won.
 		$result = $b->testBoard($board, $turn + 1);
@@ -351,7 +370,7 @@ class AI implements Player
 						{
 							//This is a valid move
 							$board[$x][$y][$z] = $piece;
-							$weight += $this->getWeightOfMove($board, $b, ($turn + 1) % 2);
+							$weight += $this->getWeightOfMove($board, $b, ($turn + 1) % 2, $remaining - 1);
 							$board[$x][$y][$z] = 0;
 						}
 					}

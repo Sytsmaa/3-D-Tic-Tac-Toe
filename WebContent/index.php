@@ -35,7 +35,8 @@
           <button value="Medium" onclick="location.href='game.php?difficulty=medium'">Medium</button>
           <button value="Hard" onclick="location.href='game.php?difficulty=hard'">Hard</button>
           <button value="Impossible" onclick="location.href='game.php?difficulty=impossible'">Impossible</button>
-          Warning: Impossible may time out.
+          Warning: Impossible may time out.<br />
+          Impossible has very slow load times
         </div>
     </div>
 <?php
