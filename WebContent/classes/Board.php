@@ -155,7 +155,7 @@
 		
 		private function isGameOver($piece)
 		{
-			if ($this->check2DRows($piece))
+			/*if ($this->check2DRows($piece))
 			{
 				return $this->GAME_OVER;
 			}	//end if
@@ -178,7 +178,12 @@
 			if ($this->check3DDiagonals($piece))
 			{
 				return $this->GAME_OVER;
-			}	//end if
+			}	//end if */
+			
+			if($this->checkBoard($piece))
+			{
+				return $this->GAME_OVER;
+			}
 			
 			if ($this->isTie())
 			{
@@ -191,7 +196,7 @@
 		private function isTie()
 		{
 			
-			for ($x = 0; $x < 4; $x++)
+			/*for ($x = 0; $x < 4; $x++)
 			{
 				for ($y = 0; $y < 4; $y++)
 				{
@@ -203,17 +208,237 @@
 						}	//end if
 					}	//end for
 				}	//end for
-			}	//end for
+			}	//end for*/
 			
 			
-			/*if(count($this->availableMoves) === 0)
+			if(count($this->availableMoves) === 0)
 			{
 				return true;
-			}*/
-			//return false;
+			}
+			return false;
 			
-			return true;
+			//return true;
 		}	//end of isTie method
+		
+		private function check2DBoard($board, $piece)
+		{
+			$found = true;
+			
+			//search all columns
+			for($x = 0; $x < 4; $x++)
+			{
+				$found = true;
+				
+				//search all rows in column
+				for($y = 0; $y < 4; $y++)
+				{
+					//not continuous
+					if($board[$x][$y] !== $piece)
+					{
+						$found = false;
+						break;
+					}
+				}
+				
+				//we found one
+				if($found)
+				{
+					return true;
+				}
+			}
+			
+			//search all rows
+			for($y = 0; $y < 4; $y++)
+			{
+				$found = true;
+				
+				//search all columns in row
+				for($x = 0; $x < 4; $x++)
+				{
+					//not continuous
+					if($board[$x][$y] !== $piece)
+					{
+						$found = false;
+						break;
+					}
+				}
+				
+				//we found one
+				if($found)
+				{
+					return true;
+				}
+			}
+			
+			//check top left to bottom right
+			$found = true;
+			for($x = 0; $x < 4; $x++)
+			{
+				//not continuous
+				if($board[$x][$x] !== $piece)
+				{
+					$found = false;
+					break;
+				}
+			}
+			
+			//we found one
+			if($found)
+			{
+				return true;
+			}
+			
+			//check bottom left to top right
+			$found = true;
+			for($x = 0; $x < 4; $x++)
+			{
+				//not continuous
+				if($board[$x][3 - $x] !== $piece)
+				{
+					$found = false;
+					break;
+				}
+			}
+			
+			return $found;
+		}
+		
+		private function checkBoard($piece)
+		{
+			$board2D = array
+			(
+				array(0, 0, 0, 0),
+				array(0, 0, 0, 0),
+				array(0, 0, 0, 0),
+				array(0, 0, 0, 0)
+			);
+			
+			//search 2D top to bottom
+			for($z = 0; $z < 4; $z++)
+			{
+				//get 2D board
+				for($y = 0; $y < 4; $y++)
+				{
+					for($x = 0; $x < 4; $x++)
+					{
+						$board2D[$x][$y] = $this->board[$x][$y][$z];
+					}
+				}
+				
+				//this board has a connection
+				if($this->check2DBoard($board2D, $piece))
+				{
+					return true;
+				}
+			}
+			
+			//search 2D left to right
+			for($x = 0; $x < 4; $x++)
+			{
+				//get 2D board
+				for($z = 0; $z < 4; $z++)
+				{
+					for($y = 0; $y < 4; $y++)
+					{
+						$board2D[$y][$z] = $this->board[$x][$y][$z];
+					}
+				}
+				
+				//this board has a connection
+				if($this->check2DBoard($board2D, $piece))
+				{
+					return true;
+				}
+			}
+			
+			//search 2D back to front
+			for($y = 0; $y < 4; $y++)
+			{
+				//get 2D board
+				for($z = 0; $z < 4; $z++)
+				{
+					for($x = 0; $x < 4; $x++)
+					{
+						$board2D[$x][$z] = $this->board[$x][$y][$z];
+					}
+				}
+				
+				//this board has a connection
+				if($this->check2DBoard($board2D, $piece))
+				{
+					return true;
+				}
+			}
+			
+			//4 diagonals
+			//top left back to bottom right front
+			$found = true;
+			for($x = 0; $x < 4; $x++)
+			{
+				//not continuous
+				if($this->board[$x][$x][$x] !== $piece)
+				{
+					$found = false;
+					break;
+				}
+			}
+			
+			//we found one
+			if($found)
+			{
+				return true;
+			}
+			
+			//bottom left back to top right front
+			$found = true;
+			for($x = 0; $x < 4; $x++)
+			{
+				//not continuous
+				if($this->board[$x][$x][3 - $x] !== $piece)
+				{
+					$found = false;
+					break;
+				}
+			}
+			
+			//we found one
+			if($found)
+			{
+				return true;
+			}
+			
+			//top left front to bottom right back
+			$found = true;
+			for($x = 0; $x < 4; $x++)
+			{
+				//not continuous
+				if($this->board[$x][3 - $x][$x] !== $piece)
+				{
+					$found = false;
+					break;
+				}
+			}
+			
+			//we found one
+			if($found)
+			{
+				return true;
+			}
+			
+			//bottom left front to top right back
+			$found = true;
+			for($x = 0; $x < 4; $x++)
+			{
+				//not continuous
+				if($this->board[$x][3 - $x][3 - $x] !== $piece)
+				{
+					$found = false;
+					break;
+				}
+			}
+			
+			return $found;
+		}
 		
 		private function check2DRows($piece)
 		{
