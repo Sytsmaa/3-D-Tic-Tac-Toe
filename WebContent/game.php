@@ -32,8 +32,12 @@
 	}
 	
 	//required files
-	require_once("layout/header.php");
-	require_once("scripts/game-script.php");
+	require_once($homeDir . "layout/header.php");
+	require_once($homeDir . "scripts/game-script.php");
+	require_once($homeDir . "classes/Board.php");
+	require_once($homeDir . "classes/AI.php");
+	require_once($homeDir . "classes/Human.php");
+	require_once($homeDir . "classes/Location.php");
 	
 	//set values for starting
 	if(!isset($_SESSION["difficulty"]))
@@ -76,28 +80,28 @@
 		?>
         <p>Starting Java</p>
         <?php
-		$_SESSION["AI"] = new Java("AI", $difficulty);
+		$_SESSION["AI"] = new AI($difficulty);//Java("AI", $difficulty);
 		
 		if($_SESSION["playerTurn"] == 1)
 		{
 			if(isset($_SESSION["username"]))
 			{
-				$_SESSION["board"] = new Java("Board", new Java("Human", $_SESSION["username"]), $_SESSION["AI"]);
+				$_SESSION["board"] = new Board(new Human($_SESSION["username"]), $_SESSION["AI"]); //Java("Board", new Java("Human", $_SESSION["username"]), $_SESSION["AI"]);
 			}
 			else
 			{
-				$_SESSION["board"] = new Java("Board", new Java("Human", ""), $_SESSION["AI"]);
+				$_SESSION["board"] = new Board(new Human(""), $_SESSION["AI"]); //Java("Board", new Java("Human", ""), $_SESSION["AI"]);
 			}
 		}
 		else
 		{
 			if(isset($_SESSION["username"]))
 			{
-				$_SESSION["board"] = new Java("Board", $_SESSION["AI"], new Java("Human", $_SESSION["username"]));
+				$_SESSION["board"] = new Board($_SESSION["AI"], new Human($_SESSION["username"])); //Java("Board", $_SESSION["AI"], new Java("Human", $_SESSION["username"]));
 			}
 			else
 			{
-				$_SESSION["board"] = new Java("Board", $_SESSION["AI"], new Java("Human", ""));
+				$_SESSION["board"] = new Board($_SESSION["AI"], new Human("")); //Java("Board", $_SESSION["AI"], new Java("Human", ""));
 			}
 			
 			//make move (AI)
@@ -146,7 +150,7 @@
 		{
 			//make move
 			$_SESSION["gameBoard"][$x][$y][$z] = $_SESSION["board"]->getTurn();
-			$_SESSION["board"]->makeMove(new Java("Location", $x, $y, $z));
+			$_SESSION["board"]->makeMove(new Location($x, $y, $z));//new Java("Location", $x, $y, $z));
 			
 			//get game state
 			$state = $_SESSION["board"]->getState();
