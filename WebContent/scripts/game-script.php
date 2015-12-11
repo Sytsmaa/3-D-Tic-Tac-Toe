@@ -8,7 +8,6 @@
 			$value = $_SESSION["casual"][0];
 			$value++;
 			$_SESSION["casual"][0] = $value;
-			$_SESSION["casual"][0] = (int)$_SESSION["casual"][0];
 			
 			if(!isset($_SESSION["username"]))
 				return;
