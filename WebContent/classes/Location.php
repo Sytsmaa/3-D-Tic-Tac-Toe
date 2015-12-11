@@ -29,6 +29,11 @@ class Location
 	 */
 	public function __constructor($x, $y, $z)
 	{
+		if(!is_numeric($x) || !is_numeric($y) || !is_numeric($z))
+		{
+			?><p>Non-Numeric location value</p><?php
+		}
+		
 		$this->x = $x;
 		$this->y = $y;
 		$this->z = $z;

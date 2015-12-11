@@ -61,7 +61,7 @@
 				{
 					for ($z = 0; $z < 4; $z++)
 					{
-						$availableMoves[] = new Location($x, $y, $z);
+						$this->availableMoves[] = new Location($x, $y, $z);
 					}	//end for
 				}	//end for
 			}	//end for
@@ -71,11 +71,15 @@
 		
 		private function isTaken($location)
 		{
+			if($location === NULL)
+			{
+				?><p>$location in isTaken() is NULL</p><?php
+			}
 			echo "<p>" . $location->getX() . "</p>\n";
 			echo "<p>" . $location->getY() . "</p>\n";
 			echo "<p>" . $location->getZ() . "</p>\n";
 			
-			if ($this->board[$location->getX()][$location->getY()][$location->getZ()] === 0)
+			if ($this->board[$location->getX()][$location->getY()][$location->getZ()] === $this->EMPTY_SPACE)
 			{
 				return false;
 			}	//end if
@@ -125,13 +129,13 @@
 				{
 					for ($z = 0; $z < 4; $z++)
 					{
-						if ($availableMoves[$x][$y][$z]->getX() === $location->getX())
+						if ($this->availableMoves[$x][$y][$z]->getX() === $location->getX())
 						{
-							if ($availableMoves[$x][$y][$z]->getY() === $location->getY())
+							if ($this->availableMoves[$x][$y][$z]->getY() === $location->getY())
 							{
-								if ($availableMoves[$x][$y][$z]->getZ() === $location->getZ())
+								if ($this->availableMoves[$x][$y][$z]->getZ() === $location->getZ())
 								{
-									unset($availableMoves[$x][$y][$z]);
+									unset($this->availableMoves[$x][$y][$z]);
 									break 3;
 								}	//end if
 							}	//end if

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <dwsync>
-<file name="AI.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942808298543347" remote="130942808290000000" Dst="1" />
-<file name="Board.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942807091193522" remote="130942807090000000" Dst="1" />
+<file name="AI.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942817668302495" remote="130942817660000000" Dst="1" />
+<file name="Board.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942825859195479" remote="130942825850000000" Dst="1" />
 <file name="Human.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942799897037305" remote="130942799890000000" Dst="1" />
 <file name="InvalidLocationException.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942736465741171" remote="130942736460000000" Dst="1" />
-<file name="Location.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942799779893277" remote="130942799770000000" Dst="1" />
+<file name="Location.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942826910405599" remote="130942826910000000" Dst="1" />
 <file name="O.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942799800203563" remote="130942799800000000" Dst="1" />
 <file name="Piece.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942744944467171" remote="130942744940000000" Dst="1" />
 <file name="Player.php" server="F:/Programs/xampp/htdocs/CS252/" local="130942737970198286" remote="130942737970000000" Dst="1" />

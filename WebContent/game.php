@@ -103,6 +103,10 @@
 			
 			//make move (AI)
 			$move = $_SESSION["AI"]->getNextMove($_SESSION["board"]);
+			if($move === NULL)
+			{
+				?><p>move is null 108</p><?php
+			}
 			$x = $move->getX();
 			$y = $move->getY();
 			$z = $move->getZ();
@@ -181,6 +185,10 @@
 			
 			//make move (AI)
 			$move = $_SESSION["AI"]->getNextMove($_SESSION["board"]);
+			if($move === NULL)
+			{
+				?><p>move is null 190</p><?php
+			}
 			$x = $move->getX();
 			$y = $move->getY();
 			$z = $move->getZ();
